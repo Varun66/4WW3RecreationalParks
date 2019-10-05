@@ -1,0 +1,48 @@
+.banner-bg{
+    background: url('../images/hiking_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center 100%;
+}
+
+.top-banner{
+    padding: 50px 0;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.top-banner h1{
+    max-width: 300px;
+}
+
+.nav-tabs{
+    padding-top: 50px;
+}
+
+.nav-tabs .nav-item{
+    width: 50%;
+    margin-bottom: -2px;
+}
+
+.nav-tabs .nav-link{
+    padding: 30px;
+    font-size: 20px;
+    color: #212529;
+    border: none;
+}
+
+.nav-tabs .nav-link.active{
+    background: #cccccc;
+}
+
+.search-container{
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.tab-content{
+    background: #cccccc;
+}
