@@ -1,3 +1,8 @@
+/*
+This stylesheet has common typography styling that is used in all pages to achieve a unified look
+*/
+
+/*Base font style for text in the body*/
 body{
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -5,22 +10,39 @@ body{
     color: #212529;
 }
 
+/*Remove any margins added by bootstrap or external stylesheets*/
 h1, h2, h3, p{
     margin: 0;
 }
 
+/*Base styling for h1 text*/
 h1{
     font-size: 58px;
     font-weight: bold;
     color: #2b402b;
 }
 
+/*Base styling for h2 text*/
 h2{
     font-size: 34px;
     font-weight: 500;
     color: #2b402b;
 }
 
+/*Base styling for h3 text*/
 h3{
     font-size: 24px;
+}
+
+/*Reduce font size in mobile view in order to increase legibility and improve the user's mobile experience.
+The font sizes defined above were too big on mobile.
+ */
+@media(max-width: 500px){
+    h1 {
+        font-size: 44px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
 }

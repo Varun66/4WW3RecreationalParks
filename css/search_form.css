@@ -1,11 +1,18 @@
+/*This stylesheet contains all styling for the search_form html page*/
+
+/******************************************** CSS for Banner Area ***************************************************/
+
+/*Styling for the banner image.*/
 .banner-bg{
-    background: url('../images/hiking_bg.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center 100%;
+    background-image: url('../images/hiking_bg.jpg');    /*Specifies the background image to use*/
+    background-size: cover;     /*Specifies the size of background image. By setting it to cover, it will automatically resize to cover the entire area of the div.*/
+    background-attachment: fixed;    /*A fixed background attachment gives a parallax effect. It means that the background will stay fixed as the user scrolls the page.*/
+    background-repeat: no-repeat;    /*By setting background repeat to no repeat, it will not repeat the background image multiple items if the size of the whole image cannot cover the entire div.*/
+    background-position: center 100%;    /*The position of the background image can be controlled. Here, it is being centered horizontally and the image is pushed all the way to the top vertically.*/
 }
 
+/*Sets the height of the div to 500px so that the background image is shown properly and it uses flexbox to vertically align 
+the items inside the flexbox.*/
 .top-banner{
     padding: 50px 0;
     min-height: 500px;
@@ -13,19 +20,24 @@
     align-items: center;
 }
 
+/*Set a max width to the h1 element so tha the text will wrap after a certain point.*/
 .top-banner h1{
     max-width: 300px;
 }
+
+/******************************************** CSS for Tabs ***************************************************/
 
 .nav-tabs{
     padding-top: 50px;
 }
 
+/*Sets each tab item's width to be half of the width of the container*/
 .nav-tabs .nav-item{
     width: 50%;
     margin-bottom: -2px;
 }
 
+/*Styling for the tab links*/
 .nav-tabs .nav-link{
     padding: 30px;
     font-size: 20px;
@@ -33,10 +45,12 @@
     border: none;
 }
 
+/*Styling for the tab link that is currently active*/
 .nav-tabs .nav-link.active{
     background: #cccccc;
 }
 
+/*Styling for the search form. It sets the width of the form to 50% and using auto for margin, it displays the form in the center.*/
 .search-container{
     width: 50%;
     margin: 0 auto;
@@ -45,4 +59,47 @@
 
 .tab-content{
     background: #cccccc;
+}
+
+/******************************************** Media Query: 992px ***************************************************/
+
+@media(max-width: 992px) {
+    /*Change the background position so that the image is can be seen properly. The background attachment is changed to scroll as mobile devices don't support a fixed background.*/
+    .banner-bg {
+        background-position: 100%;
+        background-attachment: scroll;
+    }
+}
+
+/******************************************** Media Query: 768px ***************************************************/
+
+@media(max-width: 768px) {
+    /*Reduce the height of the banner*/
+    .top-banner {
+        min-height: 375px;
+    }
+
+    /*Increase the width of the search form*/
+    .search-container {
+        width: 70%;
+    }
+}
+
+/******************************************** Media Query: 475px ***************************************************/
+
+@media(max-width: 475px) {
+
+    /*Move the items in the flexbox to the start of the flexbox.*/
+    .top-banner {
+        align-items: flex-start;
+    }
+
+    /*Increase the width of the search form*/
+    .search-container {
+        width: 90%;
+    }
+
+    .nav-tabs .nav-link {
+        padding: 20px;
+    }
 }

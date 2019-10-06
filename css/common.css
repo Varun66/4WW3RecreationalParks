@@ -1,31 +1,58 @@
-.navbar{
-    padding: 20px;
-    background: #4a6f4a;
+/*
+This stylesheet has common styling for things like the header, footer, buttons, input fields, etc.
+This is used in all pages to achieve a unified look.
+*/
+
+/***************************************** CSS for Header *************************************************/
+
+/*Set background color for the header*/
+header {
+    background-color: #4a6f4a;
 }
 
-.navbar-brand{
+/*Add padding to the navbar and set a max-width so that the header is not too stretched on screen sizes
+greater than 1440px*/
+.navbar{
+    padding: 20px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/*Set the brand title and the links on the navigation menu to white*/
+.navbar-brand, .navbar-nav .nav-link{
     color: #ffffff;
 }
 
+/*Add padding on the left and right side of the menu so that there is some spacing between the menu and the
+website brand name*/
 .navbar-nav{
     padding: 0 50px;
 }
 
+/*Add padding on the left and right side of each menu item so that they aren't too close together and the user
+can click on each one easily*/
 .navbar-nav .nav-item{
     padding: 0 15px;
 }
 
-.navbar-nav .nav-item:hover .nav-link{
+/*Add a underline effect using border bottom on the menu item that is currently active so that the user
+can easily tell which page they are on. The same effect is also shown when a user hovers over the item.*/
+.navbar-nav .nav-item:hover .nav-link, .navbar-nav .nav-item.active .nav-link{
     border-bottom: 1px solid #ffffff;
 }
 
-.navbar-nav .nav-item.active .nav-link{
-    border-bottom: 1px solid #ffffff;
+/*Add a white border around the hamburger toggle button for devices smaller than 992px so that it easier
+for the user to see the button.*/
+.navbar-toggler{
+    border: 1px solid #fff;
 }
 
-.navbar-nav .nav-link{
-    color: #ffffff;
+/*Add a background image with 3 white lines so that it gives the look of a hamburger icon*/
+.navbar-toggler-icon{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
+
+/***************************************** CSS for buttons **************************************************/
 
 .btn-outline-white{
     border: 1px solid #ffffff;
@@ -44,6 +71,8 @@
     transition: all 0.4s ease;
 }
 
+/***************************************** CSS for misc. things **************************************************/
+
 .section-padding{
     padding: 50px 15px;
 }
@@ -51,7 +80,14 @@
 .text-center{
     text-align: center;
 }
+/*Any items that are meant to be displayed on touch screen devices only is hidden until required.*/
+.mobile-only {
+    display: none;
+}
 
+/***************************************** CSS for inputs, selects **************************************************/
+
+/*Base styling for text fields and dropdowns*/
 input, select {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -62,16 +98,21 @@ input, select {
     padding: 0 10px;
 }
 
+/***************************************** CSS for footer **************************************************/
+
+/*Base styling for footer with a dark blue background and some padding*/
 footer {
     background: #08243a;
     padding: 30px 0;
 }
 
+/*Flex based display for the footer to align the items nicely instead of using floats or position absolute*/
 .footer{
     display: flex;
     justify-content: space-between;
 }
 
+/*The footer links use a flexbox and list style to display in one line */
 .footer ul{
     display: flex;
     list-style: none;
@@ -79,10 +120,12 @@ footer {
     margin: 0;
 }
 
+/*Add a border on the right side to separate each footer link*/
 .footer ul li{
     border-right: 1px solid #ffffff;
 }
 
+/*Remove the right border on the last child of the last (i.e. the last footer link)*/
 .footer ul li:last-child{
     border-right: 0;
 }
@@ -94,4 +137,47 @@ footer {
 
 .footer p{
     color: #ffffff;
+}
+
+/***************************************** Media Query: 992px **************************************************/
+
+@media(max-width: 992px) {
+    /*Remove left and right padding on the nav menu for touch screen devices and add padding on the top
+    and bottom*/
+    .navbar-nav {
+        padding: 20px 0;
+    }
+
+    .navbar-nav .nav-item {
+        padding: 10px 0;
+    }
+
+    /*Remove underline effect for active menu items for touch screen devices*/
+    .navbar-nav .nav-item.active .nav-link{
+        border: 0;
+    }
+
+    /*Any items that are meant to be displayed on touch screen devices only is shown only until a max width 992px.*/
+    .mobile-only {
+        display: block;
+    }
+
+    .sign-up-btn{
+        display: none;
+    }
+
+    /*For the footer, change the flex direction to column and center the items in the footer
+    as the screen size is too small to display everything in one row*/
+    .footer{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer ul {
+        padding-bottom: 15px;
+    }
+
+    .footer ul .nav-link, .footer p {
+        font-size: 12px;
+    }
 }
