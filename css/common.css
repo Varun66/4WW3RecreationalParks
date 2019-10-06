@@ -3,6 +3,16 @@ This stylesheet has common styling for things like the header, footer, buttons, 
 This is used in all pages to achieve a unified look.
 */
 
+/*Needed in order to make parallax effect work on Internet Explorer. It hides overflow in the html document
+and sets the overflow of body to auto so that the user can still scroll on the page.*/
+html{
+    overflow: hidden;
+    height: 100%;
+}
+body{
+    overflow: auto;
+    height: 100%;
+}
 /***************************************** CSS for Header *************************************************/
 
 /*Set background color for the header*/
@@ -73,6 +83,10 @@ for the user to see the button.*/
 
 /***************************************** CSS for misc. things **************************************************/
 
+img {
+    width: 100%;
+}
+
 .section-padding{
     padding: 50px 15px;
 }
@@ -92,7 +106,7 @@ input, select {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    border: 1px solid #0a385a;
+    border: 1px solid #08243a;
     height: 50px;
     width: 100%;
     padding: 0 10px;
