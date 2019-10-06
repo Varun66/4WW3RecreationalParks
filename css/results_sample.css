@@ -1,51 +1,111 @@
 /*This stylesheet contains all styling for the results_sample html page*/
 
-/******************************************** CSS for Banner Area ***************************************************/
 
-/*Set a max width to the h1 element so tha the text will wrap after a certain point.*/
+/*Set a min and max height to the map so that it's big enough for the user to interact with the map, but not too big that it takes up the whole screen.*/
 .top-banner img {
     min-height: 400px;
     max-height: 500px;
 }
 
+/******************************************** CSS For Results Table ***************************************************/
+
+/*Set table width to be 100% of it's container*/
 table {
     width: 100%;
     margin-top: 35px;
 }
 
+/*Base styling for the table header and cells*/
 td, th {
     padding: 30px 0px;
     text-align: center;
 }
 
+/*Custom styling for the table header. It adds a background color to the header cells and sets the font style*/
 th {
     background-color: #4a6f4a;
     color: #ffffff;
     font-weight: normal;
+    font-size: 20px;
 }
 
+/*Add a border at the bottom of each table row so each result is clearly separated*/
 tr {
     border-bottom: 1px solid #cccccc;
 }
 
+/*Add hover effect to the row where the background of it changes color*/
+tr:hover{
+    background-color: #eeeeee;
+}
+
+/*Remove the bottom border from the last row in the table*/
 tr:last-child {
     border-bottom: 0;
 }
 
+/*Custom styling for the park name*/
 td h4 {
     color: #4a6f4a;
     margin-bottom: 10px;
 }
 
+/*Custom styling for the park description*/
 td p {
     max-width: 75%;
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
 }
-/******************************************** Media Query: 768px ***************************************************/
 
-@media(max-width: 768px) {
-    /*Reduce the height of the banner*/
-    .top-banner {
+/*Custom styling for the park details link*/
+td a {
+    color: #84b984;
+}
+
+td a:hover {
+    color: #4a6f4a;
+    text-decoration: none;
+}
+
+/*Sets the park details <div> block as a flexbox that acts as a column and is centered vertically*/
+.park-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/******************************************** Media Query: 767px ***************************************************/
+
+@media(max-width: 767px) {
+    /*Reduce the height of the map*/
+    .top-banner img {
         min-height: 375px;
+    }
+
+    .park-details {
+        padding-top: 15px;
+    }
+
+    /*Reduce the size of the park image in each <td> element*/
+    td img {
+        width: 75%;
+        margin: 0 auto;
+    }
+}
+
+/******************************************** Media Query: 475px ***************************************************/
+
+@media(max-width: 475px) {
+    /*Set a max width on the <h4> element in each <td> element so that long park names don't get too close to the values in other cells*/
+    td h4 {
+        max-width: 90%;
+    }
+
+    /*Increase the size of the park image in each <td> element*/
+    td img {
+        width: 90%;
+    }
+
+    th {
+        font-size: 18px;
     }
 }
