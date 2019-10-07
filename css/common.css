@@ -66,7 +66,7 @@ for the user to see the button.*/
 
 .btn-outline-white{
     border: 1px solid #ffffff;
-    background: transparent;
+    background-color: transparent;
     color: #ffffff;
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -74,11 +74,16 @@ for the user to see the button.*/
 }
 
 .btn-outline-white:hover{
-    background: #ffffff;
+    background-color: #ffffff;
     color: #2b402b;
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
     transition: all 0.4s ease;
+}
+
+.btn-dark-blue{
+    color: #ffffff;
+    background-color: #08243a;
 }
 
 /***************************************** CSS for misc. things **************************************************/
@@ -103,8 +108,8 @@ img {
 
 /*Base styling for text fields and dropdowns*/
 input, select {
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;   /*Adding border radius support for all webkit browsers*/
+    -moz-border-radius: 4px;    /*Adding border radius support for Firefox*/
     border-radius: 4px;
     border: 1px solid #08243a;
     height: 50px;

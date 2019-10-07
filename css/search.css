@@ -55,12 +55,26 @@ the items inside the flexbox.*/
     width: 50%;
     margin: 0 auto;
     padding: 50px 0;
+    display: flex;
 }
 
 .tab-content{
     background: #cccccc;
 }
 
+/*Change border radius for <input> and <select> elements. We are increasing specificity by adding .search-container so that it overrides the common styling for these elements*/
+.search-container input, .search-container select {
+    -webkit-border-radius: 4px 0px 0px 4px;   /*Adding border radius support for all webkit browsers*/
+    -moz-border-radius: 4px 0px 0px 4px;    /*Adding border radius support for Firefox*/
+    border-radius: 4px 0px 0px 4px;
+    border-right: 0;
+}
+
+.search-container .btn-dark-blue {
+    -webkit-border-radius: 0px 4px 4px 0px;   /*Adding border radius support for all webkit browsers*/
+    -moz-border-radius: 0px 4px 4px 0px;    /*Adding border radius support for Firefox*/
+    border-radius: 0px 4px 4px 0px;
+}
 /******************************************** Media Query: 992px ***************************************************/
 
 @media(max-width: 992px) {
