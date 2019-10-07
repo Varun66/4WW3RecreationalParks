@@ -15,6 +15,16 @@ table {
     margin-top: 35px;
 }
 
+/*Set the column width of the first column in the table*/
+.col-big {
+    width: 60%;
+}
+
+/*Set the column width of the first and second columns in the table*/
+.col-small {
+    width: 20%;
+}
+
 /*Base styling for the table header and cells*/
 td, th {
     padding: 30px 0px;

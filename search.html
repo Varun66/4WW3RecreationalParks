@@ -93,24 +93,27 @@
                 <!--This is the tab content for the name tab, as specified with the id.-->
                 <div class="tab-pane fade show active" id="name" role="tabpanel" aria-labelledby="name-tab">
                     <!--This is a form element with one text input so that a user can search by name. It performs no action right now.-->
-                    <form class="search-container" action="" method="POST" name="searchByName">
+                    <form class="search-container" action="#" method="POST" name="searchByName">
+                        <!--We are making this input field required so that users can't submit empty inputs-->
                         <input name="parkName" type="text" placeholder="Enter the name of a park" required>
                         <button class="btn btn-dark-blue" type="submit">Submit</button>
                     </form>
                 </div>
                 <!--This is the tab content for the rating tab, as specified with the id.-->
-                <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab" required>
+                <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
                     <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. It performs no action right now.-->
-                    <form class="search-container" action="" method="POST" name="searchByRating">
-                        <select name="rating">
-                            <option>Select a Rating</option>
-                            <option>4.5 - 5</option>
-                            <option>4.0 - 4.4</option>
-                            <option>3.5 - 3.9</option>
-                            <option>3.0 - 3.4</option>
-                            <option>2.5 - 2.9</option>
-                            <option>2.0 - 2.4</option>
-                            <option>Less than 2.0</option>
+                    <form class="search-container" action="#" method="POST" name="searchByRating">
+                        <!--We are making this select field required so that users can't submit empty inputs-->
+                        <select name="rating" required>
+                            <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
+                            <option value="" disabled selected>Select a Rating</option>
+                            <option value="4.5-5">4.5 - 5</option>
+                            <option value="4.0-4.4">4.0 - 4.4</option>
+                            <option value="3.5-3.9">3.5 - 3.9</option>
+                            <option value="3.0-3.4">3.0 - 3.4</option>
+                            <option value="2.5-2.9">2.5 - 2.9</option>
+                            <option value="2.0-2.4">2.0 - 2.4</option>
+                            <option value="Less than 2.0">Less than 2.0</option>
                         </select>
                         <button class="btn btn-dark-blue" type="submit">Submit</button>
                     </form>
@@ -145,6 +148,5 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="" async defer></script>
     </body>
 </html>
