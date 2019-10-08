@@ -1,0 +1,124 @@
+/*This stylesheet contains all styling for the individual object html page*/
+
+/******************************************** CSS for Banner Area ***************************************************/
+
+/*Styling for the banner image.*/
+.banner-bg{
+    background-image: url('../images/bruce_peninsula_individual.jpg');    /*Specifies the background image to use*/
+    background-size: cover;     /*Specifies the size of background image. By setting it to cover, it will automatically resize to cover the entire area of the div.*/
+    background-attachment: fixed;    /*A fixed background attachment gives a parallax effect. It means that the background will stay fixed as the user scrolls the page.*/
+    background-repeat: no-repeat;    /*By setting background repeat to no repeat, it will not repeat the background image multiple items if the size of the whole image cannot cover the entire div.*/
+    background-position: center 100%;    /*The position of the background image can be controlled. Here, it is being centered horizontally and the image is pushed all the way to the top vertically.*/
+}
+
+/*Sets the height of the div to 500px so that the background image is shown properly and it uses flexbox to vertically align 
+the items inside the flexbox.*/
+.top-banner{
+    padding: 50px 0;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+/*Set a max width to the h1 element so tha the text will wrap after a certain point.*/
+.top-banner h1{
+    max-width: 300px;
+    color: #ffffff;
+}
+
+/******************************************** CSS for Ratings Section ***************************************************/
+
+.ratings-section.section-padding {
+    padding-top: 0;
+}
+
+.ratings-section .rating-img {
+    padding: 0;
+}
+
+/*Set the size of the user profile image and round the borders to 50% so the image turns into the shape of circle*/
+.ratings-section .rating-img img {
+    width: 62px;
+    border-radius: 50%;
+}
+
+/*Add a border at the bottom of each row to separate them */
+.ratings-section .ratings-row {
+    border-bottom: 1px solid #cccccc;
+    padding: 25px 0;
+}
+
+/*Remove border from the last row in the ratings section */
+.ratings-section .ratings-row:last-child {
+    border: 0;
+}
+
+.ratings-section .rating-text {
+    padding: 0;
+}
+
+/*Use flexbox to align the author and date on the same line. The space-between style for justify-content adds space between the flex items so that they are on opposite sides of the
+container.*/
+.ratings-section .rating-text .rating-author {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 10px 0;
+}
+
+.ratings-section .rating-text p {
+    line-height: 1.4;
+}
+
+/******************************************** Media Query: 1024px ***************************************************/
+
+@media (max-width: 1024px) {
+    .ratings-section .rating-text {
+      padding: 0 15px;
+    }
+}
+
+/******************************************** Media Query: 992px ***************************************************/
+
+@media(max-width: 992px) {
+    /*Change the background position so that the image is can be seen properly. The background attachment is changed to scroll as mobile devices don't support a fixed background.*/
+    .banner-bg {
+        background-position: 100%;
+        background-attachment: scroll;
+    }
+}
+
+/******************************************** Media Query: 767px ***************************************************/
+
+@media (max-width: 767px) {
+    /*Reduce the width of the user profile image so that it doesn't overlap onto the text*/
+    .ratings-section .rating-img img {
+        width: 42px;
+    }
+}
+
+/******************************************** Media Query: 575px ***************************************************/
+
+@media(max-width: 575px) {
+
+    /*Move the items in the flexbox to the start of the flexbox.*/
+    .top-banner {
+        align-items: flex-start;
+    }
+
+    .ratings-section .ratings-row{
+        padding: 25px 15px 15px 15px;
+    }
+}
+
+/******************************************** Media Query: 475px ***************************************************/
+
+@media(max-width: 475px) {
+    .ratings-section .rating-text {
+        padding: 0 15px;
+    }
+
+    /*Set the width of the user profile image to 100% so it becomes responsive and its relative to it's container's size.*/
+    .ratings-section .rating-img img {
+        width: 100%;
+    }
+}

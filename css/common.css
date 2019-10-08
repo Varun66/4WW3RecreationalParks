@@ -107,7 +107,7 @@ img {
 /***************************************** CSS for inputs, selects **************************************************/
 
 /*Base styling for text fields and dropdowns*/
-input, select {
+input, select, textarea {
     -webkit-border-radius: 4px;   /*Adding border radius support for all webkit browsers*/
     -moz-border-radius: 4px;    /*Adding border radius support for Firefox*/
     border-radius: 4px;
@@ -116,7 +116,20 @@ input, select {
     width: 100%;
     padding: 0 10px;
 }
-label{padding: 10px 0}
+
+textarea {
+    min-height: 150px;
+    padding: 15px;
+}
+
+label {
+    padding: 30px 0 10px 0;
+    margin: 0;
+}
+
+hr {
+    border-top: 1px solid #cccccc;
+}
 
 /***************************************** CSS for footer **************************************************/
 

@@ -1,0 +1,20 @@
+{
+    "short_name": "ParkFinder",
+    "name": "ParkFinder",
+    "icons": [
+      {
+        "src":"./images/icon-192.png",
+        "sizes": "image/png",
+        "type": "192x192"
+      },
+      {
+        "src":"./images/icon-512.png",
+        "sizes": "image/png",
+        "type": "512x512"
+      }
+    ],
+    "start_url": "/?utm_source=homescreen",
+    "background_color": "#fff",
+    "Theme_color": "#4a6f4a",
+    "display": "standalone"
+  }

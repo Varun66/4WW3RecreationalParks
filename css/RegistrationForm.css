@@ -1,0 +1,28 @@
+/*This stylesheet contains all styling for the user registration and object submission html pages*/
+
+/*Base styling for the form container. It is being vertically center aligned using flexbox.*/
+.register-form {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.register-form p {
+  padding: 10px 0;
+}
+
+/* Base style the file input type */
+input[type=file] {
+  border: 0;
+  padding: 10px 0;
+}
+
+.signin {
+  padding: 15px 0;
+}
+
+.register-submit {
+  padding-top: 30px;
+}

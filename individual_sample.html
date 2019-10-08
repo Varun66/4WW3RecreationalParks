@@ -12,11 +12,22 @@
         <meta name="description" content="A page to search for the parks either by name or rating">
         <!--This meta tag enables a responsive viewport-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Meta data for the Open Graph protocol. The URLs used for content values are hypothetical-->
+        <meta property="og:title" content="ParkFinder" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://mywebsite.com/individual_sample.html/" />
+        <meta property="og:image" content="http://mywebsite.com/images/social_media_image.png/" />
+        <!--Meta data for the Twitter Cards-->
+        <meta name="twitter:card" content="website">
+        <meta name="twitter:site" content="@ParkFinder">
+        <meta name="twitter:creator" content="@4WW3" />
         <!--Link tags with the css stylesheets-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/search.css">
+        <link rel="stylesheet" href="./css/individual_sample.css">
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
+        <!--Manifest file for adding the website to android and ios homescreen-->
+        <link rel="manifest" href="/manifest.json">
     </head>
     <!--Start of the body of the document. All the content of the website goes inside this tag-->
     <body>
@@ -34,9 +45,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <!--There is <ul> element that lists all the menu items and displays them as a list in a single row-->
                     <ul class="navbar-nav">
-                        <!--An active class is added to the menu item that is currently active. In other words,
-                        the active class represents which page the user is currently on-->
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="search.html">Home</a>
                         </li>
                         <li class="nav-item">
@@ -64,61 +73,70 @@
         <div class="banner-bg">
             <div class="container">
                 <div class="top-banner">
-                    <h1>Find the best parks near you</h1>
+                    <h1>Bruce Peninsula National Park</h1>
                 </div>
             </div>
         </div>
 
-        <!--This div contains the search form to search by either name or rating-->
-        <div class="container section-padding">
-            <h2 class="text-center">Search By</h2>
-            <!--Bootstrap tabs are used here. Each tab contain a different search option so users can choose a tab accordingly-->
-            <ul class="nav nav-tabs" id="searchTab" role="tablist">
-                <!--This is the 'Name' tab. It has a link which references the correct tab content to show. This is done by the href attribute
-                which points to the id of a div that holds it's corresponding tab content. The href attribute here points to
-                a div with id="name" so when a user clicks on the tab, it wil find the div with this id and display it's contents. -->
-                <li class="nav-item">
-                    <!--There is an active class which specifies which tab is currently active. There is a data-toggle attribute
-                    which says that this is a tab. Aria-controls and aria-selected are attributes used for accessibility purposes.-->
-                    <a class="nav-link active" id="name-tab" data-toggle="tab" href="#name" role="tab" aria-controls="name" aria-selected="true">Name</a>
-                </li>
-                <!--This is the 'Rating' tab. It behaves in the same way as explained above. The href attribute here points to
-                a div with id="rating" so when a user clicks on the tab, it wil find the div with this id and display it's contents. -->
-                <li class="nav-item">
-                    <!--There is a data-toggle attribute which says that this is a tab. Aria-controls and aria-selected are attributes used for accessibility purposes.-->
-                    <a class="nav-link" id="rating-tab" data-toggle="tab" href="#rating" role="tab" aria-controls="rating" aria-selected="false">Rating</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <!--This is the tab content for the name tab, as specified with the id.-->
-                <div class="tab-pane fade show active" id="name" role="tabpanel" aria-labelledby="name-tab">
-                    <!--This is a form element with one text input so that a user can search by name. The form action directs the page to the sample results page.-->
-                    <form class="search-container" action="results_sample.html" method="POST" name="searchByName">
-                        <!--We are making this input field required so that users can't submit empty inputs-->
-                        <input name="parkName" type="text" placeholder="Enter the name of a park" required>
-                        <button class="btn btn-dark-blue" type="submit">Submit</button>
-                    </form>
-                </div>
-                <!--This is the tab content for the rating tab, as specified with the id.-->
-                <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
-                    <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. he form action directs the page to the sample results page.-->
-                    <form class="search-container" action="results_sample.html" method="POST" name="searchByRating">
-                        <!--We are making this select field required so that users can't submit empty inputs-->
-                        <select name="rating" required>
-                            <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
-                            <option value="" disabled selected>Select a Rating</option>
-                            <option value="4.5-5">4.5 - 5</option>
-                            <option value="4.0-4.4">4.0 - 4.4</option>
-                            <option value="3.5-3.9">3.5 - 3.9</option>
-                            <option value="3.0-3.4">3.0 - 3.4</option>
-                            <option value="2.5-2.9">2.5 - 2.9</option>
-                            <option value="2.0-2.4">2.0 - 2.4</option>
-                            <option value="Less than 2.0">Less than 2.0</option>
-                        </select>
-                        <button class="btn btn-dark-blue" type="submit">Submit</button>
-                    </form>
-                </div>
+        <!--This container holds the map. For now it is an image, but it will change to an actual map. It also contains the Place microdata schema-->
+        <div class="container section-padding map-location" itemscope itemtype="http://schema.org/Place">
+            <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+                <meta itemprop="latitude" content="45.195829" />
+                <meta itemprop="longitude" content="-81.5239711" />
+                <img src="./images/individual_map_sample.png" alt="A sample map with the park location">
             </div>
+        </div>
+
+        <!--This is the ratings and reviews section. It uses the bootstrap grid system to display each user review-->
+        <div class="container section-padding ratings-section">
+            <h2>Ratings and Reviews</h2>
+            <div class="ratings">
+                <!--The follow <div> block contains the markup for the Review microdata schema-->
+				<div class="row ratings-row" itemscope itemtype="http://schema.org/Review">
+                    <!--This column contains the user profile picture-->
+					<div class="col-1 rating-img">
+						<img src="./images/anonymous-user.png" alt="A profile picture of the user"/>
+                    </div>
+                    <!--This column contains the user name, rating, date of post and review-->
+					<div class="col-11 rating-text" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+						<div class="rating-author">
+							<p><b><span itemprop="name">User1</span></b><br/>Rating: <span itemprop="ratingValue">4</span>/5</p>
+							<p>Oct 7, 2019</p>
+						</div>
+						<p itemprop="reviewBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</p>
+					</div>
+                </div>
+                <!--The follow <div> block contains the markup for the Review microdata schema-->
+				<div class="row ratings-row" itemscope itemtype="http://schema.org/Review">
+                    <!--This column contains the user profile picture-->
+					<div class="col-1 rating-img">
+						<img src="./images/anonymous-user.png" alt="A profile picture of the user"/>
+                    </div>
+                    <!--This column contains the user name, rating, date of post and review-->
+					<div class="col-11 rating-text" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+						<div class="rating-author">
+							<p><b><span itemprop="name">User2</span></b><br/>Rating: <span itemprop="ratingValue">4</span>/5</p>
+							<p>Oct 7, 2019</p>
+						</div>
+						<p itemprop="reviewBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</p>
+					</div>
+                </div>
+                <!--The follow <div> block contains the markup for the Review microdata schema-->
+				<div class="row ratings-row" itemscope itemtype="http://schema.org/Review">
+                    <!--This column contains the user profile picture-->
+					<div class="col-1 rating-img">
+						<img src="./images/anonymous-user.png" alt="A profile picture of the user"/>
+                    </div>
+                    <!--This column contains the user name, rating, date of post and review-->
+					<div class="col-11 rating-text" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+						<div class="rating-author">
+							<p><b><span itemprop="name">User3</span></b><br/>Rating: <span itemprop="ratingValue">4</span>/5</p>
+							<p>Oct 7, 2019</p>
+						</div>
+						<p itemprop="reviewBody">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</p>
+					</div>
+				</div>
+			</div>
         </div>
 
         <!--This is the footer of the document-->

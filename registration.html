@@ -1,3 +1,5 @@
+<!-- Web Page for user to Register the form -->
+
 <!--DOCTYPE declaration which specifies that the document is in html5 -->
 <!DOCTYPE html>
 <!--Html tag signifies the start of the html document. Everything should go inside this tag-->
@@ -14,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Link tags with the css stylesheets-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/results_sample.css">
+        <link rel="stylesheet" href="./css/RegistrationForm.css">
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
     </head>
@@ -56,89 +58,62 @@
             </nav>
         </header>
 
-        <!--This container holds the map. For now it is an image, but it will change to an actual map. It is given the class of container fluid so that is spans across
-        the whole screen and the p-0 class removes any padding.-->
-        <div class="container-fluid p-0">
-            <div class="top-banner">
-                <img src="./images/map_sample.PNG" alt="A sample map with markers">
-            </div>
-        </div>
+        <div class="container register-form">
+            <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
+            <form action="#" method="POST" name="registerForm">
 
-        <!--This container holds the search results table-->
-       <div class="container section-padding">
-           <h2 class="text-center">Results</h2>
-           <!--A <table> element is used to create the results table-->
-           <table>
-               <!-- The <colgroup> tag can be used to apply styles to entire columns. Here, we are setting the width of each column in the table using their corresponding classes. -->
-                <colgroup>
-                    <col class="col-big">
-                    <col class="col-small">
-                    <col class="col-small">
-                </colgroup>
-                <!--The header of the table which consists of <th> elements that represent each heading-->
-               <thead>
-                   <tr>
-                       <th>Park</th>
-                       <th>Rating</th>
-                       <th>City</th>
-                   </tr>
-               </thead>
-               <!--The body of the table which consists of rows (i.e. <tr> tags) and the tabular data to be displayed in each row (i.e. <td> tags)-->
-               <tbody>
-                    <tr>
-                        <td>
-                            <!--Using the bootstrap grid system, we are defining a row that will consist of the park image and park details-->
-                            <div class="row">
-                                <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-6" to say that for any viewport size above and including 768px,
-                                    the <div> width should be 6 columns or 50%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
-                                <div class="col-md-6">
-                                    <img src="./images/bruce_peninsula.jpg" alt="An image of high park"/>
-                                </div>
-                                <div class="col-md-6 park-details">
-                                    <h4>Bruce Peninsula National Park</h4>
-                                    <p>One of Ontario's most popular national parks</p>
-                                    <a href="individual_sample.html" target="_blank">View More Details</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>4.8</td>
-                        <td>Tobermory, ON</td>
-                   </tr>
-                   <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="./images/high_park.jpg" alt="An image of high park"/>
-                                </div>
-                                <div class="col-md-6 park-details">
-                                    <h4>High Park</h4>
-                                    <p>A beautiful family park located in the heart of toronto</p>
-                                    <a href="individual_sample.html" target="_blank">View More Details</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>4.7</td>
-                        <td>Toronto, ON</td>
-                   </tr>
-                   <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="./images/georgian_bay.jpg" alt="An image of high park"/>
-                                </div>
-                                <div class="col-md-6 park-details">
-                                    <h4>Georgian Bay Islands National Park</h4>
-                                    <p>Plently of trails, hiking, boating and much more</p>
-                                    <a href="individual_sample.html" target="_blank">View More Details</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>4.7</td>
-                        <td>Honey Harbour, ON</td>
-                   </tr>
-               </tbody>
-           </table>
-       </div>
+                <h2>Register</h2>
+                <p>Please fill in this form to create an account.</p>
+                <!--The <hr> element creates a horizontal line which acts as a divider-->
+                <hr>
+
+                 <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-4" to say that for any viewport size above and including 768px,
+                    the <div> width should be 4 columns or 33.3333%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="name"><b>Name</b></label>
+                        <!--An input form element of type=text for the name of the user. It is a required field.-->
+                        <input id="name" type="text" placeholder="Enter name" name="name" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email"><b>Email</b></label>
+                        <!--An input form element of type=email for the email of the user. It is a required field-->
+                        <input id="email" type="email" placeholder="Enter email" name="email" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="psw"><b>Password</b></label>
+                        <!--An input form element of type=password for the password of the user account. It is a required field-->
+                        <input id="psw" type="password" placeholder="Enter password" name="psw" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="psw-confirm"><b>Confirm Password</b></label>
+                        <!--An input form element of type=password for the user to confirm their password. It is a required field-->
+                        <input id="psw-confirm" type="password" placeholder="Confirm password" name="psw-confirm" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="date"><b>Birth Date</b></label>
+                        <!--An input form element of type=date for the user's date of birth. It is an optional field-->
+                        <input id="date" type="date" name="date">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="gender"><b>Gender</b></label>
+                        <!--An select form element for the gender of the user. It is an optional field-->
+                        <select id="gender" name="gender">
+                            <option value="" disabled selected>Select a Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="register-submit">
+                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                    <button type="submit" class="btn btn-dark-blue">Register</button>
+                </div>
+
+            </form>
+        </div>
 
         <!--This is the footer of the document-->
         <footer>

@@ -1,3 +1,5 @@
+<!-- Web Page for user to submit the form -->
+
 <!--DOCTYPE declaration which specifies that the document is in html5 -->
 <!DOCTYPE html>
 <!--Html tag signifies the start of the html document. Everything should go inside this tag-->
@@ -14,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Link tags with the css stylesheets-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/results_sample.css">
+        <link rel="stylesheet" href="./css/RegistrationForm.css">
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
     </head>
@@ -40,7 +42,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="submission.html">Submit a Review</a>
                         </li>
                         <li class="nav-item">
@@ -56,89 +58,60 @@
             </nav>
         </header>
 
-        <!--This container holds the map. For now it is an image, but it will change to an actual map. It is given the class of container fluid so that is spans across
-        the whole screen and the p-0 class removes any padding.-->
-        <div class="container-fluid p-0">
-            <div class="top-banner">
-                <img src="./images/map_sample.PNG" alt="A sample map with markers">
-            </div>
+        <div class="container register-form">
+            <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
+            <form action="action_page.php">
+
+                <h2>Submission</h2>
+                <p>Please fill in this form to submit a review.</p>
+                <!--The <hr> element creates a horizontal line which acts as a divider-->
+                <hr>
+
+                <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-4" to say that for any viewport size above and including 768px,
+                    the <div> width should be 4 columns or 33.3333%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="name"><b>Park Name</b></label>
+                         <!--An input form element of type=text for the name of the object. It is a required field.-->
+                        <input id="name" type="text" placeholder="Enter name of object" name="name" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="location"><b>Location</b></label>
+                        <!--An input form element of type=text for the location of the object. It is a required field.-->
+                        <input id="location" type="text" placeholder="Enter a pair of lat-long coordinates" name="loc" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="userRating"><b>Rating</b></label>
+                        <!--A select form element of for the rating tje user wants to give. It is a required field.-->
+                        <select id="userRating" name="userRating" required>
+                            <option value="" disabled selected>Select a Rating</option>
+                            <option value="4.5-5">4.5 - 5</option>
+                            <option value="4.0-4.4">4.0 - 4.4</option>
+                            <option value="3.5-3.9">3.5 - 3.9</option>
+                            <option value="3.0-3.4">3.0 - 3.4</option>
+                            <option value="2.5-2.9">2.5 - 2.9</option>
+                            <option value="2.0-2.4">2.0 - 2.4</option>
+                            <option value="Less than 2.0">Less than 2.0</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="imageFile"><b>Upload Image</b></label>
+                        <!--An input form element of type=file for the user to upload an image. It is an optional field.-->
+                        <input id="imageFile"  type="file" name="imageFile">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="userReview"><b>Review</b></label>
+                        <!--A textarea form element for the description of the object. It is a required field.-->
+                        <textarea id="userReview" placeholder="Enter a descriotion of the object" name="userReview" required></textarea>
+                    </div>
+                </div>
+
+                <div class="signin">
+                    <button type="submit" class="btn btn-dark-blue">Submit</button>
+                </div>
+            </form>
         </div>
 
-        <!--This container holds the search results table-->
-       <div class="container section-padding">
-           <h2 class="text-center">Results</h2>
-           <!--A <table> element is used to create the results table-->
-           <table>
-               <!-- The <colgroup> tag can be used to apply styles to entire columns. Here, we are setting the width of each column in the table using their corresponding classes. -->
-                <colgroup>
-                    <col class="col-big">
-                    <col class="col-small">
-                    <col class="col-small">
-                </colgroup>
-                <!--The header of the table which consists of <th> elements that represent each heading-->
-               <thead>
-                   <tr>
-                       <th>Park</th>
-                       <th>Rating</th>
-                       <th>City</th>
-                   </tr>
-               </thead>
-               <!--The body of the table which consists of rows (i.e. <tr> tags) and the tabular data to be displayed in each row (i.e. <td> tags)-->
-               <tbody>
-                    <tr>
-                        <td>
-                            <!--Using the bootstrap grid system, we are defining a row that will consist of the park image and park details-->
-                            <div class="row">
-                                <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-6" to say that for any viewport size above and including 768px,
-                                    the <div> width should be 6 columns or 50%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
-                                <div class="col-md-6">
-                                    <img src="./images/bruce_peninsula.jpg" alt="An image of high park"/>
-                                </div>
-                                <div class="col-md-6 park-details">
-                                    <h4>Bruce Peninsula National Park</h4>
-                                    <p>One of Ontario's most popular national parks</p>
-                                    <a href="individual_sample.html" target="_blank">View More Details</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>4.8</td>
-                        <td>Tobermory, ON</td>
-                   </tr>
-                   <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="./images/high_park.jpg" alt="An image of high park"/>
-                                </div>
-                                <div class="col-md-6 park-details">
-                                    <h4>High Park</h4>
-                                    <p>A beautiful family park located in the heart of toronto</p>
-                                    <a href="individual_sample.html" target="_blank">View More Details</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>4.7</td>
-                        <td>Toronto, ON</td>
-                   </tr>
-                   <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="./images/georgian_bay.jpg" alt="An image of high park"/>
-                                </div>
-                                <div class="col-md-6 park-details">
-                                    <h4>Georgian Bay Islands National Park</h4>
-                                    <p>Plently of trails, hiking, boating and much more</p>
-                                    <a href="individual_sample.html" target="_blank">View More Details</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>4.7</td>
-                        <td>Honey Harbour, ON</td>
-                   </tr>
-               </tbody>
-           </table>
-       </div>
 
         <!--This is the footer of the document-->
         <footer>
