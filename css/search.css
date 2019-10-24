@@ -31,9 +31,9 @@ the items inside the flexbox.*/
     padding-top: 50px;
 }
 
-/*Sets each tab item's width to be half of the width of the container*/
+/*Sets each tab item's width to be a third of the width of the container*/
 .nav-tabs .nav-item{
-    width: 50%;
+    width: 33.3333%;
     margin-bottom: -2px;
 }
 
@@ -43,6 +43,8 @@ the items inside the flexbox.*/
     font-size: 20px;
     color: #212529;
     border: none;
+    height: 100%;
+    text-align: center;
 }
 
 /*Styling for the tab link that is currently active*/
@@ -75,6 +77,44 @@ the items inside the flexbox.*/
     -moz-border-radius: 0px 4px 4px 0px;    /*Adding border radius support for Firefox*/
     border-radius: 0px 4px 4px 0px;
 }
+
+/*Hide the form element for My Location tab*/
+.location-search {
+    display: none;
+    padding-top: 0;
+}
+
+/*Base styling for response message from Geolocation API*/
+#response-msg {
+    text-align: center;
+    padding: 30px 0;
+    color: #08243a;
+}
+
+/*Container for the spinner*/
+.spinner-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+/*Base styling for spinner*/
+.spinner {
+    border: 6px solid #fafafa;
+    border-top: 6px solid #08243a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+
+/*Spinning animation using css keyframes*/
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /******************************************** Media Query: 992px ***************************************************/
 
 @media(max-width: 992px) {

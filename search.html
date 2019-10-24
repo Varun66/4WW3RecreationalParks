@@ -88,6 +88,12 @@
                     <!--There is a data-toggle attribute which says that this is a tab. Aria-controls and aria-selected are attributes used for accessibility purposes.-->
                     <a class="nav-link" id="rating-tab" data-toggle="tab" href="#rating" role="tab" aria-controls="rating" aria-selected="false">Rating</a>
                 </li>
+                <!--This is the 'My Location' tab. It behaves in the same way as explained above. The href attribute here points to
+                a div with id="userLocation" so when a user clicks on the tab, it wil find the div with this id and display it's contents. -->
+                <li class="nav-item">
+                    <!--There is a data-toggle attribute which says that this is a tab. Aria-controls and aria-selected are attributes used for accessibility purposes.-->
+                    <a id="userLocation-tab" class="nav-link" data-toggle="tab" href="#userLocation" role="tab" aria-controls="userLocation" aria-selected="false">My Location</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <!--This is the tab content for the name tab, as specified with the id.-->
@@ -101,7 +107,7 @@
                 </div>
                 <!--This is the tab content for the rating tab, as specified with the id.-->
                 <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
-                    <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. he form action directs the page to the sample results page.-->
+                    <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. The form action directs the page to the sample results page.-->
                     <form class="search-container" action="results_sample.html" method="POST" name="searchByRating">
                         <!--We are making this select field required so that users can't submit empty inputs-->
                         <select name="rating" required>
@@ -114,6 +120,29 @@
                             <option value="2.5-2.9">2.5 - 2.9</option>
                             <option value="2.0-2.4">2.0 - 2.4</option>
                             <option value="Less than 2.0">Less than 2.0</option>
+                        </select>
+                        <button class="btn btn-dark-blue" type="submit">Submit</button>
+                    </form>
+                </div>
+                <!--This is the tab content for the My Location tab, as specified with the id. When a user clicks on this tab, the browser uses the Geolocation API to retrieve the user's location using Javascript-->
+                <div class="tab-pane fade" id="userLocation" role="tabpanel" aria-labelledby="userLocation-tab">
+                    <!--This div gives the user an instruction to allow or deny on the browser to get their location coordinates.-->
+                    <div id="response-msg"><h4>Please click allow or decline</h4></div>
+                    <!--This div displays a spinner to the user while they the browser is making the API call. Using Javascript, the spinner hides after the call has been made.-->
+                    <div class="spinner-container">
+                        <div class="spinner"></div>
+                    </div>
+                    <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by radius. The form action directs the page to the sample results page.-->
+                    <form class="search-container location-search" action="results_sample.html" method="POST" name="searchByUserLocation">
+                        <select name="userLocation" required>
+                            <option value="" disabled selected>Select a Radius</option>
+                            <option value="5">5 km</option>
+                            <option value="10">10 km</option>
+                            <option value="20">20 km</option>
+                            <option value="50">50 km</option>
+                            <option value="100">100 km</option>
+                            <option value="200">150 km</option>
+                            <option value="More than 250">> 200 km</option>
                         </select>
                         <button class="btn btn-dark-blue" type="submit">Submit</button>
                     </form>
@@ -148,5 +177,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="./js/searchPage.js"></script>
     </body>
 </html>

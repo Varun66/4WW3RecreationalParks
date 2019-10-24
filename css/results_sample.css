@@ -1,10 +1,25 @@
 /*This stylesheet contains all styling for the results_sample html page*/
 
+/******************************************** CSS for Google Map ***************************************************/
 
 /*Set a min and max height to the map so that it's big enough for the user to interact with the map, but not too big that it takes up the whole screen.*/
-.top-banner img {
+#map {
     min-height: 400px;
     max-height: 500px;
+}
+
+/*Base styling for markers on the map*/
+.park-marker {
+    padding: 20px;
+}
+
+.park-marker h4 {
+    color: #4a6f4a;
+    margin-bottom: 10px;
+}
+
+.park-marker p {
+    margin-bottom: 10px;
 }
 
 /******************************************** CSS For Results Table ***************************************************/

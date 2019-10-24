@@ -78,13 +78,19 @@
             </div>
         </div>
 
-        <!--This container holds the map. For now it is an image, but it will change to an actual map. It also contains the Place microdata schema-->
+        <!--This container holds the map. It also contains the Place microdata schema-->
         <div class="container section-padding map-location" itemscope itemtype="http://schema.org/Place">
             <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
                 <meta itemprop="latitude" content="45.195829" />
                 <meta itemprop="longitude" content="-81.5239711" />
-                <img src="./images/individual_map_sample.png" alt="A sample map with the park location">
+                <div id="map"></div>
             </div>
+        </div>
+
+        <!--This container has details about the park.-->
+        <div class="container details-section">
+            <h2>Park Details</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</p>
         </div>
 
         <!--This is the ratings and reviews section. It uses the bootstrap grid system to display each user review-->
@@ -166,5 +172,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="js/objectPage.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB3lEBZaaMOi_NVCn4PhcB2KNC-owMxYY&libraries=places&callback=initLocationProcedure" async defer></script>
     </body>
 </html>

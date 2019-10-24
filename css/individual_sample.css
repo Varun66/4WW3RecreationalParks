@@ -26,11 +26,31 @@ the items inside the flexbox.*/
     color: #ffffff;
 }
 
-/******************************************** CSS for Ratings Section ***************************************************/
+/******************************************** CSS for Google Map ***************************************************/
 
-.ratings-section.section-padding {
-    padding-top: 0;
+/*Set a min and max height to the map so that it's big enough for the user to interact with the map, but not too big that it takes up the whole screen.*/
+#map {
+    min-height: 400px;
+    max-height: 500px;
 }
+
+/*Base styling for markers on the map*/
+.park-marker {
+    padding: 20px;
+}
+
+.park-marker h4 {
+    color: #4a6f4a;
+}
+
+/******************************************** CSS for Details Section ***************************************************/
+
+.details-section p{
+    padding-top: 20px;
+    line-height: 1.4;
+}
+
+/******************************************** CSS for Ratings Section ***************************************************/
 
 .ratings-section .rating-img {
     padding: 0;
