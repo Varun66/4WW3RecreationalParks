@@ -5,10 +5,11 @@ $(document).ready(function(){
       navigator.geolocation.getCurrentPosition(onSuccess);
   } else {
     /*If not successful, display an error message*/
-      $("#response-msg").html("<h4>Unfortunately, this feature is not available. Please choose another criteria to search by</h4>");
-    }
-    /*Sets the latitude and longitude as default*/
-    function onSuccess(position) {
-      $('input[name="location"]').val(position.coords.latitude + ", " + position.coords.longitude);
-    }
+    alert("Unfortunately, we could not find your location");
+  }
+
+  /*Sets the latitude and longitude as default*/
+  function onSuccess(position) {
+    $('input[name="location"]').val(position.coords.latitude + ", " + position.coords.longitude);
+  }
 });
