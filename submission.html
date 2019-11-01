@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="./css/RegistrationForm.css">
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
+
     </head>
     <!--Start of the body of the document. All the content of the website goes inside this tag-->
     <body>
@@ -60,7 +61,7 @@
 
         <div class="container register-form">
             <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
-            <form action="action_page.php">
+            <form action="#" name="submissionForm" method="post">
 
                 <h2>Submission</h2>
                 <p>Please fill in this form to submit a review.</p>
@@ -73,12 +74,13 @@
                     <div class="col-md-4">
                         <label for="name"><b>Park Name</b></label>
                          <!--An input form element of type=text for the name of the object. It is a required field.-->
-                        <input id="name" type="text" placeholder="Enter name of object" name="name" required>
+                        <input id="name" type="text" placeholder="Enter name of object" name="name" required pattern="[a-zA-Z]*||^(?=.*\d)(?=.*[A-Z])(?!.*\s).*$||^(?=.*\d)(?=.*[a-z])(?!.*\s).*$">
+                        <p>Only numbers not allowed and no special characters allowed</p>
                     </div>
                     <div class="col-md-4">
                         <label for="location"><b>Location</b></label>
                         <!--An input form element of type=text for the location of the object. It is a required field.-->
-                        <input id="location" type="text" placeholder="Enter a pair of lat-long coordinates" name="loc" required>
+                        <input id="location" type="text" placeholder="Enter a pair of lat,long coordinates" name="location" required>
                     </div>
                     <div class="col-md-4">
                         <label for="userRating"><b>Rating</b></label>
@@ -102,7 +104,7 @@
                     <div class="col-md-12">
                         <label for="userReview"><b>Review</b></label>
                         <!--A textarea form element for the description of the object. It is a required field.-->
-                        <textarea id="userReview" placeholder="Enter a descriotion of the object" name="userReview" required></textarea>
+                        <textarea id="userReview" placeholder="Enter a descriotion of the object" name="userReview"></textarea>
                     </div>
                 </div>
 

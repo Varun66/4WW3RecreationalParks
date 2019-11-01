@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="./css/RegistrationForm.css">
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
+
     </head>
     <!--Start of the body of the document. All the content of the website goes inside this tag-->
     <body>
@@ -60,7 +61,7 @@
 
         <div class="container register-form">
             <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
-            <form action="#" method="POST" name="registerForm">
+            <form action="#" method="POST" name="registerForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
 
                 <h2>Register</h2>
                 <p>Please fill in this form to create an account.</p>
@@ -73,22 +74,22 @@
                     <div class="col-md-4">
                         <label for="name"><b>Name</b></label>
                         <!--An input form element of type=text for the name of the user. It is a required field.-->
-                        <input id="name" type="text" placeholder="Enter name" name="name" required>
+                        <input id="name" type="text" placeholder="Enter name" name="name">
                     </div>
                     <div class="col-md-4">
                         <label for="email"><b>Email</b></label>
                         <!--An input form element of type=email for the email of the user. It is a required field-->
-                        <input id="email" type="email" placeholder="Enter email" name="email" required>
+                        <input id="email" type="text" placeholder="Enter email" name="email">
                     </div>
                     <div class="col-md-4">
                         <label for="psw"><b>Password</b></label>
                         <!--An input form element of type=password for the password of the user account. It is a required field-->
-                        <input id="psw" type="password" placeholder="Enter password" name="psw" required>
+                        <input id="psw" type="password" placeholder="Enter password" name="psw">
                     </div>
                     <div class="col-md-4">
                         <label for="psw-confirm"><b>Confirm Password</b></label>
                         <!--An input form element of type=password for the user to confirm their password. It is a required field-->
-                        <input id="psw-confirm" type="password" placeholder="Confirm password" name="psw-confirm" required>
+                        <input id="psw-confirm" type="password" placeholder="Confirm password" name="psw-confirm">
                     </div>
                     <div class="col-md-4">
                         <label for="date"><b>Birth Date</b></label>
@@ -142,5 +143,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="./js/registration.js"></script>
+
     </body>
 </html>
