@@ -11,8 +11,8 @@
 
 // Connect to AWS
     $bucketName = 'myparkfinders3';
-	$IAM_KEY = 'AKIAJ6NIYWCB7IYQNG6A';
-    $IAM_SECRET = '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';
+	$IAM_KEY = '';
+    $IAM_SECRET = '';
     // Connect to AWS
 
     if (isset($_POST['name']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['userRating']) && isset($_POST['userReview'])){
