@@ -10,6 +10,7 @@ $(document).ready(function(){
 
   /*Sets the latitude and longitude as default*/
   function onSuccess(position) {
-    $('input[name="location"]').val(position.coords.latitude + ", " + position.coords.longitude);
+    $('input[name="latitude"]').val(position.coords.latitude);
+    $('input[name="longitude"]').val(position.coords.longitude);
   }
 });

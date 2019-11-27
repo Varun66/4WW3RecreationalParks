@@ -38,7 +38,7 @@
                     <!--There is <ul> element that lists all the menu items and displays them as a list in a single row-->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="search.html">Home</a>
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
@@ -61,7 +61,7 @@
 
         <div class="container register-form">
             <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
-            <form action="#" name="submissionForm" method="post">
+            <form action="phpfunctions/addObject.php" name="submissionForm" method="post" enctype="multipart/form-data">
 
                 <h2>Submission</h2>
                 <p>Please fill in this form to submit a review.</p>
@@ -71,18 +71,23 @@
                 <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-4" to say that for any viewport size above and including 768px,
                     the <div> width should be 4 columns or 33.3333%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="name"><b>Park Name</b></label>
                          <!--An input form element of type=text for the name of the object. It is a required field.-->
                         <input id="name" type="text" placeholder="Enter name of object" name="name" required pattern="[a-zA-Z]*||^(?=.*\d)(?=.*[A-Z])(?!.*\s).*$||^(?=.*\d)(?=.*[a-z])(?!.*\s).*$">
                         <p>Only numbers not allowed and no special characters allowed</p>
                     </div>
-                    <div class="col-md-4">
-                        <label for="location"><b>Location</b></label>
-                        <!--An input form element of type=text for the location of the object. It is a required field.-->
-                        <input id="location" type="text" placeholder="Enter a pair of lat,long coordinates" name="location" required>
+                    <div class="col-md-3">
+                        <label for="latitude"><b>Latitude</b></label>
+                        <!--An input form element of type=text for the latitude of the object. It is a required field.-->
+                        <input id="latitude" type="text" placeholder="Enter the lat coordinates" name="latitude" required>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <label for="longitude"><b>Longitude</b></label>
+                        <!--An input form element of type=text for the longitude of the object. It is a required field.-->
+                        <input id="longitude" type="text" placeholder="Enter the long coordinates" name="longitude" required>
+                    </div>
+                    <div class="col-md-3">
                         <label for="userRating"><b>Rating</b></label>
                         <!--A select form element of for the rating tje user wants to give. It is a required field.-->
                         <select id="userRating" name="userRating" required>
@@ -104,7 +109,7 @@
                     <div class="col-md-12">
                         <label for="userReview"><b>Review</b></label>
                         <!--A textarea form element for the description of the object. It is a required field.-->
-                        <textarea id="userReview" placeholder="Enter a descriotion of the object" name="userReview"></textarea>
+                        <textarea id="userReview" placeholder="Enter a descriotion of the object" name="userReview" required></textarea>
                     </div>
                 </div>
 
@@ -121,7 +126,7 @@
                 <!--It has a <ul> element with some footer links to navigate around the website.-->
                 <ul>
                     <li>
-                        <a class="nav-link" href="search.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li>
                         <a class="nav-link" href="#">About</a>

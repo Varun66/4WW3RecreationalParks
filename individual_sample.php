@@ -46,7 +46,7 @@
                     <!--There is <ul> element that lists all the menu items and displays them as a list in a single row-->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="search.html">Home</a>
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
@@ -151,7 +151,7 @@
                 <!--It has a <ul> element with some footer links to navigate around the website.-->
                 <ul>
                     <li>
-                        <a class="nav-link" href="search.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li>
                         <a class="nav-link" href="#">About</a>
@@ -173,6 +173,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="js/objectPage.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initLocationProcedure" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB3lEBZaaMOi_NVCn4PhcB2KNC-owMxYY&callback=initLocationProcedure" async defer></script>
     </body>
 </html>
