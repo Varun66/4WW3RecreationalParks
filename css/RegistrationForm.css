@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+form {
+  width: 100%;
+}
+
 .register-form p {
   padding: 10px 0;
 }
@@ -25,4 +29,9 @@ input[type=file] {
 
 .register-submit {
   padding-top: 30px;
+}
+
+.error{
+  color: red;
+  padding-top: 5px;
 }

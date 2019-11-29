@@ -48,7 +48,7 @@ can click on each one easily*/
 /*Add a underline effect using border bottom on the menu item that is currently active so that the user
 can easily tell which page they are on. The same effect is also shown when a user hovers over the item.*/
 .navbar-nav .nav-item:hover .nav-link, .navbar-nav .nav-item.active .nav-link{
-    border-bottom: 1px solid #ffffff;
+    text-decoration: underline;
 }
 
 /*Add a white border around the hamburger toggle button for devices smaller than 992px so that it easier
@@ -60,6 +60,11 @@ for the user to see the button.*/
 /*Add a background image with 3 white lines so that it gives the look of a hamburger icon*/
 .navbar-toggler-icon{
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.welcome-msg {
+    color: #ffffff;
+    padding-right: 10px;
 }
 
 /***************************************** CSS for buttons **************************************************/
@@ -84,6 +89,10 @@ for the user to see the button.*/
 .btn-dark-blue{
     color: #ffffff;
     background-color: #08243a;
+}
+
+.login-btn{
+    margin-right: 10px;
 }
 
 /***************************************** CSS for misc. things **************************************************/

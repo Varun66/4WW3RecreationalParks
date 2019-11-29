@@ -17,7 +17,7 @@
 
     if (isset($_POST['name']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['userRating']) && isset($_POST['userReview'])){
 
-        $pathInS3 = '';
+        $key = '';
 
         if(is_uploaded_file($_FILES["imageFile"]['tmp_name'])){
             try {
@@ -43,7 +43,6 @@
             // For this, I would generate a unqiue random string for the key name. But you can do whatever.
             $key = basename($_FILES["imageFile"]['tmp_name']);
             $file = $_FILES["imageFile"]['tmp_name'];
-            $pathInS3 = 'https://' . $bucketName. '.s3.amazonaws.com/' . $key;
             // Add it to S3
             try {
                 // Uploaded:
@@ -63,12 +62,12 @@
         }
 
         // Query we are using to check if the user is legit
-        $sql = "INSERT INTO objects (Name, Latitude, Longitude, Rating, ImageURL, Review) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO objects (Name, Latitude, Longitude, Rating, ImageKey, Review) VALUES (?, ?, ?, ?, ?, ?)";
 
         // Prepared statements: For when we don't have all the parameters so we store a template to be executed
         $stmnt = $pdo->prepare($sql);
         try {
-            $stmnt->execute([$_POST['name'], $_POST['latitude'], $_POST['longitude'], $_POST['userRating'], $pathInS3, $_POST['userReview']]);
+            $stmnt->execute([$_POST['name'], $_POST['latitude'], $_POST['longitude'], $_POST['userRating'], $key, $_POST['userReview']]);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
