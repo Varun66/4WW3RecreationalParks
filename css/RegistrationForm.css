@@ -16,16 +16,6 @@
   text-align: center;
 }
 
-.success-msg {
-  color: green;
-  margin-bottom: 20px;
-}
-
-.fail-msg {
-  color: red;
-  margin-bottom: 20px;
-}
-
 form {
   width: 100%;
 }

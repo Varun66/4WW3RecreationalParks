@@ -2,6 +2,12 @@
 
 <div  class="container register-form">
     <form action="phpfunctions/login.php" method="POST" name="registerForm" method="post">
+        <?php
+            if (isset($_SESSION['account']) && $_SESSION['account'] === "Incorrect"){
+                echo '<h4 class="fail-msg">The password or email is incorrect! Please try again.</h4>';
+                $_SESSION['account'] = "default";
+            }
+        ?>
         <h2>Login</h2>
         <div class="row">
             <div class="col-md-6">

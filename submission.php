@@ -11,11 +11,18 @@
             if (isset($_SESSION['status']) && $_SESSION['status'] === "success"){
                 echo '<h4 class="success-msg">Thank you! Your submission was successful.</h4>';
                 $_SESSION['status'] = "default";
-            } else if (isset($_SESSION['status']) && $_SESSION['status'] === "failed") {
-                echo '<h4 class="fail-msg">Your submission was not successful!</h4>';
+            } else if (isset($_SESSION['status']) && $_SESSION['status'] === "InvalidLatitude") {
+                echo '<h4 class="fail-msg">Please check the format of the latitude field!</h4>';
                 $_SESSION['status'] = "default";
-            } else {
-                echo '';
+            } else if (isset($_SESSION['status']) && $_SESSION['status'] === "InvalidLongitude") {
+                echo '<h4 class="fail-msg">Please check the format of the longitude field!</h4>';
+                $_SESSION['status'] = "default";
+            } else if (isset($_SESSION['status']) && $_SESSION['status'] === "Duplicate") {
+                echo '<h4 class="fail-msg">This park already exists in our database!</h4>';
+                $_SESSION['status'] = "default";
+            } else if (isset($_SESSION['status']) && $_SESSION['status'] === "Unset") {
+                echo '<h4 class="fail-msg">The submission failed! Please try again later.</h4>';
+                $_SESSION['status'] = "default";
             }
         ?>
         <h2>Submission</h2>
@@ -29,7 +36,7 @@
             <div class="col-md-3">
                 <label for="name"><b>Park Name</b></label>
                     <!--An input form element of type=text for the name of the object. It is a required field.-->
-                <input id="name" type="text" placeholder="Enter name of object" name="name" required pattern="[a-zA-Z]*||^(?=.*\d)(?=.*[A-Z])(?!.*\s).*$||^(?=.*\d)(?=.*[a-z])(?!.*\s).*$">
+                <input id="name" type="text" placeholder="Enter name of object" name="name" required pattern="[a-zA-Z ]*||^(?=.*\d)(?=.*[A-Z ])(?!.*\s).*$||^(?=.*\d)(?=.*[a-z])(?!.*\s).*$">
                 <p>Only numbers not allowed and no special characters allowed</p>
             </div>
             <div class="col-md-3">
@@ -43,28 +50,14 @@
                 <input id="longitude" type="text" placeholder="Enter the long coordinates" name="longitude" required>
             </div>
             <div class="col-md-3">
-                <label for="userRating"><b>Rating</b></label>
-                <!--A select form element of for the rating tje user wants to give. It is a required field.-->
-                <select id="userRating" name="userRating" required>
-                    <option value="" disabled selected>Select a Rating</option>
-                    <option value="4.5-5">4.5 - 5</option>
-                    <option value="4.0-4.4">4.0 - 4.4</option>
-                    <option value="3.5-3.9">3.5 - 3.9</option>
-                    <option value="3.0-3.4">3.0 - 3.4</option>
-                    <option value="2.5-2.9">2.5 - 2.9</option>
-                    <option value="2.0-2.4">2.0 - 2.4</option>
-                    <option value="Less than 2.0">Less than 2.0</option>
-                </select>
-            </div>
-            <div class="col-md-4">
                 <label for="imageFile"><b>Upload Image</b></label>
                 <!--An input form element of type=file for the user to upload an image. It is an optional field.-->
                 <input id="imageFile"  type="file" name="imageFile">
             </div>
             <div class="col-md-12">
-                <label for="userReview"><b>Review</b></label>
+                <label for="description"><b>Description</b></label>
                 <!--A textarea form element for the description of the object. It is a required field.-->
-                <textarea id="userReview" placeholder="Enter a descriotion of the object" name="userReview" required></textarea>
+                <textarea id="description" placeholder="Enter a descriotion of the object" name="description" required></textarea>
             </div>
         </div>
 
@@ -76,7 +69,7 @@
 
 <?php
     } else {
-        echo '<div class="login-message"><h2>Please login first to submit a review!</h2></div>';
+        echo '<div class="login-message"><h2>Please login first to submit a new park!</h2></div>';
     }
 ?>
 

@@ -64,12 +64,20 @@ the items inside the flexbox.*/
     background: #cccccc;
 }
 
-/*Change border radius for <input> and <select> elements. We are increasing specificity by adding .search-container so that it overrides the common styling for these elements*/
-.search-container input, .search-container select {
+/*Change border radius for <input> elements. We are increasing specificity by adding .search-container so that it overrides the common styling for these elements*/
+.search-container input {
     -webkit-border-radius: 4px 0px 0px 4px;   /*Adding border radius support for all webkit browsers*/
     -moz-border-radius: 4px 0px 0px 4px;    /*Adding border radius support for Firefox*/
     border-radius: 4px 0px 0px 4px;
     border-right: 0;
+}
+
+.rating-range {
+    padding: 0 17px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    line-height: 1;
 }
 
 .search-container .btn-dark-blue {
@@ -78,10 +86,31 @@ the items inside the flexbox.*/
     border-radius: 0px 4px 4px 0px;
 }
 
+.search-container .rating-submit {
+    display: block;
+    margin-left: 30px;
+    border-radius: 4px;
+}
+
 /*Hide the form element for My Location tab*/
 .location-search {
     display: none;
     padding-top: 0;
+}
+
+.or-text {
+    padding-top: 50px;
+}
+
+.view-all-parks {
+    -webkit-border-radius: 6px;   /*Adding border radius support for all webkit browsers*/
+    -moz-border-radius: 6px;    /*Adding border radius support for Firefox*/
+    border-radius: 6px;
+    padding: 10px 30px;
+    font-size: 20px;
+    margin-top: 50px;
+    background: transparent;
+    border: 1px solid #08243a;
 }
 
 /*Base styling for response message from Geolocation API*/

@@ -41,6 +41,7 @@
         <div class="tab-pane fade show active" id="name" role="tabpanel" aria-labelledby="name-tab">
             <!--This is a form element with one text input so that a user can search by name. The form action directs the page to the sample results page.-->
             <form class="search-container" action="results.php" method="POST" name="searchByName">
+                <input type="hidden" name="searchByName" value=""/>
                 <!--We are making this input field required so that users can't submit empty inputs-->
                 <input name="parkName" type="text" placeholder="Enter the name of a park" required>
                 <button class="btn btn-dark-blue" type="submit">Submit</button>
@@ -50,19 +51,29 @@
         <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
             <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. The form action directs the page to the sample results page.-->
             <form class="search-container" action="results.php" method="POST" name="searchByRating">
+                <input type="hidden" name="searchByRating" value=""/>
                 <!--We are making this select field required so that users can't submit empty inputs-->
-                <select name="rating" required>
+                <select name="minRating" required>
                     <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
-                    <option value="" disabled selected>Select a Rating</option>
-                    <option value="4.5-5">4.5 - 5</option>
-                    <option value="4.0-4.4">4.0 - 4.4</option>
-                    <option value="3.5-3.9">3.5 - 3.9</option>
-                    <option value="3.0-3.4">3.0 - 3.4</option>
-                    <option value="2.5-2.9">2.5 - 2.9</option>
-                    <option value="2.0-2.4">2.0 - 2.4</option>
-                    <option value="Less than 2.0">Less than 2.0</option>
+                    <option value="" disabled selected>Minimum</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
                 </select>
-                <button class="btn btn-dark-blue" type="submit">Submit</button>
+                <h2 class="rating-range"> - </h2>
+                <!--We are making this select field required so that users can't submit empty inputs-->
+                <select name="maxRating" required>
+                    <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
+                    <option value="" disabled selected>Maximum</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <button class="btn btn-dark-blue rating-submit" type="submit">Submit</button>
             </form>
         </div>
         <!--This is the tab content for the My Location tab, as specified with the id. When a user clicks on this tab, the browser uses the Geolocation API to retrieve the user's location using Javascript-->
@@ -75,20 +86,27 @@
             </div>
             <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by radius. The form action directs the page to the sample results page.-->
             <form class="search-container location-search" action="results.php" method="POST" name="searchByUserLocation">
+                <input type="hidden" name="searchByUserLocation" value=""/>
                 <select name="userLocation" required>
-                    <option value="" disabled selected>Select a Radius</option>
-                    <option value="5">5 km</option>
-                    <option value="10">10 km</option>
-                    <option value="20">20 km</option>
-                    <option value="50">50 km</option>
-                    <option value="100">100 km</option>
-                    <option value="200">150 km</option>
-                    <option value="More than 250">> 200 km</option>
+                    <option value="" disabled selected>Select a Radius (in km)</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="200">200</option>
+                    <option value="More than 200">>200</option>
                 </select>
                 <button class="btn btn-dark-blue" type="submit">Submit</button>
             </form>
         </div>
     </div>
+    <h2 class="text-center or-text">or</h2>
+    <form class="text-center" action="results.php" method="POST" name="viewAllParks">
+        <input type="hidden" name="viewAllParks" value=""/>
+        <button class="btn view-all-parks" type="submit">View All Parks</button>
+    </form>
 </div>
 
 <?php include "footer.php";?>

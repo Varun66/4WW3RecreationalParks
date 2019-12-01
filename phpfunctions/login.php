@@ -21,15 +21,13 @@
         $rows = $stmnt->fetchAll();
 
         // If there is only one user
-        if (count($rows) != 1){
-            // Setting the session to the returned user ID.
-            echo 'account already exists';
-        } else if (password_verify($_POST['pwd'], $rows[0]['Password'])) {
+        if (password_verify($_POST['pwd'], $rows[0]['Password'])) {
             $_SESSION['username'] = $rows[0]['Name'];
             $_SESSION['logged'] = true;
-            header("Location: http://{$_SERVER['HTTP_HOST']}/4ww3recreationalparks/index.php");
+            header("Location: https://{$_SERVER['HTTP_HOST']}/index.php");
         } else {
-            echo 'incorrect password';
+            $_SESSION['account'] = "Incorrect";
+            header("Location: https://{$_SERVER['HTTP_HOST']}/loginPage.php");
         }
 
     } else {

@@ -35,9 +35,9 @@ function initLocationProcedure() {
                 /*Calling the setContent method to set the inner html of the infowindow*/
 				infowindow.setContent(
 					'<div id="content" class="container park-marker">' +
-					'<h4>' + parks[i]["NameOfPark"] + '</h4>' +
+					'<h4>' + parks[i]["Name"] + '</h4>' +
                     '<p>' + parks[i]["Description"] + '</p>' +
-                    '<a href="individual_sample.html" target="_blank">View More Details</a>' +
+                    '<a href="individual.php?id=' + i + '" target="_blank">View More Details</a>' +
 					'</div>'
 				);
                 infowindow.open(map, marker);  //opens the infowindow on the map above the clicked marker

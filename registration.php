@@ -1,87 +1,34 @@
 <!-- Web Page for user to Register the form -->
 <?php include "header.php";?>
 
-<?php
-    // define variables and set to empty values
-    $nameErr = $emailErr = $pswErr = $confirmPswErr = $birthDateErr = $ageErr= "";
-    $isFormValid = true;
-    $hashed_salted_pwd = null;
-    $submit_status = "default";
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["name"])) {
-            $nameErr = "Name is required";
-            $isFormValid = false;
-        }
-
-        if (empty($_POST["email"])) {
-            $emailErr = "Email is required";
-            $isFormValid = false;
-        } else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-            $emailErr = "Invalid email format";
-            $isFormValid = false;
-        }
-
-        if (empty($_POST["psw"])) {
-            $pswErr = "Password is required";
-            $isFormValid = false;
-        }
-
-        if (empty($_POST["psw-confirm"])) {
-            $confirmPswErr = "Confirm password is required";
-            $isFormValid = false;
-        }else if ($_POST["psw"] !== $_POST["psw-confirm"]) {
-            $confirmPswErr = "Password does not match";
-            $isFormValid = false;
-        } else {
-            $hashed_salted_pwd = password_hash($_POST["psw"], PASSWORD_DEFAULT);
-        }
-
-        if (empty($_POST["date"])) {
-            $birthDateErr = "Birth Date is required";
-            $isFormValid = false;
-        }else if (!(preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$_POST["date"]))) {
-            $birthDateErr = "Date is in wrong format";
-            $isFormValid = false;
-        }
-
-        if (empty($_POST["age"])) {
-            $ageErr = "Age is required";
-            $isFormValid = false;
-        }else if (!(is_numeric($_POST["age"]))) {
-            $ageErr = "Please enter a number";
-            $isFormValid = false;
-        }
-
-        if ($isFormValid) {
-            $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-            $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Query we are using to check if the user is legit
-            $sql = "INSERT INTO users (Name, Email, Password, BirthDate, Age) VALUES (?, ?, ?, ?, ?)";
-            $stmnt = $pdo->prepare($sql);
-            try {
-                $stmnt->execute([$_POST['name'], $_POST['email'], $hashed_salted_pwd, $_POST['date'], $_POST['age']]);
-                $submit_status = "success";
-            } catch (PDOException $e) {
-                $submit_status = "failed";
-                echo $e->getMessage();
-            }
-        }
-    }
-?>
 <div class="container register-form">
     <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" name="registerForm" method="post">
+    <form action="phpfunctions/register.php" method="POST" name="registerForm" method="post">
         <?php
-            if ($submit_status === "success"){
+            if (isset($_SESSION['validate']) && $_SESSION['validate'] === "success"){
                 echo '<h4 class="success-msg">Thank you! Your registration was successful. You can login in now.</h4>';
-                $_SESSION['status'] = "default";
-            } else if ($submit_status === "failed") {
+                $_SESSION['validate'] = "default";
+            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "failed") {
                 echo '<h4 class="fail-msg">Your registration was not successful!</h4>';
-                $_SESSION['status'] = "default";
-            } else {
-                echo '';
+                $_SESSION['validate'] = "default";
+            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidEmail") {
+                echo '<h4 class="fail-msg">Please check the format of the email field!</h4>';
+                $_SESSION['validate'] = "default";
+            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidPassword") {
+                echo '<h4 class="fail-msg">The password does not match!</h4>';
+                $_SESSION['validate'] = "default";
+            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidDate") {
+                echo '<h4 class="fail-msg">Please check the format of the date field!</h4>';
+                $_SESSION['validate'] = "default";
+            }  else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidAge") {
+                echo '<h4 class="fail-msg">Please check the format of the age field! It should be a number</h4>';
+                $_SESSION['validate'] = "default";
+            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "Unset") {
+                echo '<h4 class="fail-msg">The submission failed! Please try again later.</h4>';
+                $_SESSION['validate'] = "default";
+            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "Duplicate") {
+                echo '<h4 class="fail-msg">An account with this email already exists!</h4>';
+                $_SESSION['validate'] = "default";
             }
         ?>
         <h2>Register</h2>
@@ -95,38 +42,32 @@
             <div class="col-md-4">
                 <label for="name"><b>Name</b></label>
                 <!--An input form element of type=text for the name of the user. It is a required field.-->
-                <input id="name" type="text" placeholder="Enter name" name="name">
-                <div class="error"><?php echo $nameErr;?></div>
+                <input id="name" type="text" placeholder="Enter name" name="name" required>
             </div>
             <div class="col-md-4">
                 <label for="email"><b>Email</b></label>
                 <!--An input form element of type=email for the email of the user. It is a required field-->
-                <input id="email" type="text" placeholder="Enter email" name="email">
-                <div class="error"><?php echo $emailErr;?></div>
+                <input id="email" type="text" placeholder="Enter email" name="email" required>
             </div>
             <div class="col-md-4">
                 <label for="psw"><b>Password</b></label>
                 <!--An input form element of type=password for the password of the user account. It is a required field-->
-                <input id="psw" type="password" placeholder="Enter password" name="psw">
-                <div class="error"><?php echo $pswErr;?></div>
+                <input id="psw" type="password" placeholder="Enter password" name="psw" required>
             </div>
             <div class="col-md-4">
                 <label for="psw-confirm"><b>Confirm Password</b></label>
                 <!--An input form element of type=password for the user to confirm their password. It is a required field-->
-                <input id="psw-confirm" type="password" placeholder="Confirm password" name="psw-confirm">
-                <div class="error"><?php echo $confirmPswErr;?></div>
+                <input id="psw-confirm" type="password" placeholder="Confirm password" name="psw-confirm" required>
             </div>
             <div class="col-md-4">
                 <label for="date"><b>Birth Date</b></label>
                 <!--An input form element of type=date for the user's date of birth. It is an optional field-->
-                <input id="date" type="text"  placeholder="yyyy-mm-dd" name="date">
-                <div class="error"><?php echo $birthDateErr;?></div>
+                <input id="date" type="text"  placeholder="yyyy-mm-dd" name="date" required>
             </div>
             <div class="col-md-4">
                 <label for="age"><b>Age</b></label>
                 <!--An input form element of type=date for the user's date of birth. It is an optional field-->
-                <input id="age" type="text" placeholder="Enter a number"  name="age">
-                <div class="error"><?php echo $ageErr;?></div>
+                <input id="age" type="text" placeholder="Enter a number"  name="age" required>
             </div>
         </div>
 

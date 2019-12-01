@@ -18,15 +18,15 @@
         <!--Link tags with the css stylesheets-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <?php if(basename($_SERVER['PHP_SELF']) == 'registration.php' || basename($_SERVER['PHP_SELF']) == 'loginPage.php'){ ?>
-            <link rel="stylesheet" href="./css/RegistrationForm.css">
+            <link rel="stylesheet" href="./css/RegistrationForm.css?v=1">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'index.php'){ ?>
-            <link rel="stylesheet" href="./css/search.css">
+            <link rel="stylesheet" href="./css/search.css?v=1">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'results.php'){ ?>
-            <link rel="stylesheet" href="./css/results_sample.css">
+            <link rel="stylesheet" href="./css/results_sample.css?v=1">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'submission.php'){ ?>
-            <link rel="stylesheet" href="./css/RegistrationForm.css">
+            <link rel="stylesheet" href="./css/RegistrationForm.css?v=1">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'individual.php'){ ?>
-            <link rel="stylesheet" href="./css/individual_sample.css">
+            <link rel="stylesheet" href="./css/individual_sample.css?v=1">
         <?php } ?>
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
@@ -56,7 +56,7 @@
                             <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="submission.php">Submit a Review</a>
+                            <a class="nav-link" href="submission.php">Submit a Park</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
