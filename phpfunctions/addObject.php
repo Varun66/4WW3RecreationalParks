@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     ini_set('display_errors', 1);
     require '../vendor/autoload.php';
 
@@ -72,12 +74,11 @@
             echo $e->getMessage();
         }
 
-        // Redirect to login page
-        echo 'Success';
+        $_SESSION['status'] = "success";
+        header("Location: http://{$_SERVER['HTTP_HOST']}/4ww3recreationalparks/submission.php");
 
     } else {
-        // This path is dependent on where the root of your documents is located.
-        // For this it is made to point back to the register file if registering has failed.
-        echo 'Failed';
+        $_SESSION['status'] = "failed";
+        header("Location: http://{$_SERVER['HTTP_HOST']}/4ww3recreationalparks/submission.php");
     }
 ?>

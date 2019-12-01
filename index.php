@@ -40,7 +40,7 @@
         <!--This is the tab content for the name tab, as specified with the id.-->
         <div class="tab-pane fade show active" id="name" role="tabpanel" aria-labelledby="name-tab">
             <!--This is a form element with one text input so that a user can search by name. The form action directs the page to the sample results page.-->
-            <form class="search-container" action="results_sample.html" method="POST" name="searchByName">
+            <form class="search-container" action="results.php" method="POST" name="searchByName">
                 <!--We are making this input field required so that users can't submit empty inputs-->
                 <input name="parkName" type="text" placeholder="Enter the name of a park" required>
                 <button class="btn btn-dark-blue" type="submit">Submit</button>
@@ -49,7 +49,7 @@
         <!--This is the tab content for the rating tab, as specified with the id.-->
         <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
             <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. The form action directs the page to the sample results page.-->
-            <form class="search-container" action="results_sample.html" method="POST" name="searchByRating">
+            <form class="search-container" action="results.php" method="POST" name="searchByRating">
                 <!--We are making this select field required so that users can't submit empty inputs-->
                 <select name="rating" required>
                     <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
@@ -74,7 +74,7 @@
                 <div class="spinner"></div>
             </div>
             <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by radius. The form action directs the page to the sample results page.-->
-            <form class="search-container location-search" action="results_sample.html" method="POST" name="searchByUserLocation">
+            <form class="search-container location-search" action="results.php" method="POST" name="searchByUserLocation">
                 <select name="userLocation" required>
                     <option value="" disabled selected>Select a Radius</option>
                     <option value="5">5 km</option>

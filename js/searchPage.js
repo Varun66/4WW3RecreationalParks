@@ -1,5 +1,4 @@
 /*This file contains the javascript for the search page*/
-
 $(document).ready(function(){
   /*A click listener on the user location tab that fetches user location using Geolocation APi*/
     $("#userLocation-tab").click(function(){
@@ -13,13 +12,16 @@ $(document).ready(function(){
     });
 
     /*Function that runs when geolocation is successfull*/
-    function onSuccess() {
+    function onSuccess(position) {
         /*Hide the div with the spinner*/
         $(".spinner-container").hide();
         /*Set css display properties for the div with class location search*/
         $(".location-search").css("display", "flex");
         /*Replace html in div with a success message and instructions*/
         $("#response-msg").html("<h4>You can select an option below to see all the best parks within a certain radius from you.</h4>");
+        $('.location-search').append("<input name='latitude' type='hidden' value="+position.coords.latitude+">");
+        $('.location-search').append("<input name='longitude' type='hidden' value="+position.coords.longitude+">");
+
     }
 
     /*Function that runs when there is an error*/

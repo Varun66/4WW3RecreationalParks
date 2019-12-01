@@ -1,10 +1,23 @@
 <!-- Web Page for user to submit the form -->
 <?php include "header.php";?>
 
+<?php
+    if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
+?>
 <div class="container register-form">
     <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
     <form action="phpfunctions/addObject.php" name="submissionForm" method="post" enctype="multipart/form-data">
-
+        <?php
+            if (isset($_SESSION['status']) && $_SESSION['status'] === "success"){
+                echo '<h4 class="success-msg">Thank you! Your submission was successful.</h4>';
+                $_SESSION['status'] = "default";
+            } else if (isset($_SESSION['status']) && $_SESSION['status'] === "failed") {
+                echo '<h4 class="fail-msg">Your submission was not successful!</h4>';
+                $_SESSION['status'] = "default";
+            } else {
+                echo '';
+            }
+        ?>
         <h2>Submission</h2>
         <p>Please fill in this form to submit a review.</p>
         <!--The <hr> element creates a horizontal line which acts as a divider-->
@@ -60,5 +73,11 @@
         </div>
     </form>
 </div>
+
+<?php
+    } else {
+        echo '<div class="login-message"><h2>Please login first to submit a review!</h2></div>';
+    }
+?>
 
 <?php include "footer.php";?>

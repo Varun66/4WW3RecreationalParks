@@ -2,27 +2,6 @@
 
 /* this function initializes Google Maps*/
 function initLocationProcedure() {
-    /*This an array of park objects with the necessary information to create a marker. This acts as model of our database */
-    var parks = [
-        {
-            Latitude: "45.2260142",
-            Longitude: "-81.5270672",
-            NameOfPark: "Bruce Peninsula National Park",
-            Description: "One of Ontario's most popular national parks",
-        },
-        {
-            Latitude: "43.6465518",
-            Longitude: "-79.465879",
-            NameOfPark: "High Park",
-            Description: "A beautiful family park located in the heart of toronto",
-        },
-        {
-            Latitude: "44.8743203",
-            Longitude: "-79.8721441",
-            NameOfPark: "Georgian Bay Islands National Park",
-            Description: "Plently of trails, hiking, boating and much more",
-        },
-    ];
 
     /*Creating an infowindow to open when a user clicks on the marker*/
     var infowindow = new google.maps.InfoWindow();

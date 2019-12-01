@@ -6,6 +6,7 @@
     $nameErr = $emailErr = $pswErr = $confirmPswErr = $birthDateErr = $ageErr= "";
     $isFormValid = true;
     $hashed_salted_pwd = null;
+    $submit_status = "default";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["name"])) {
             $nameErr = "Name is required";
@@ -61,19 +62,28 @@
             $stmnt = $pdo->prepare($sql);
             try {
                 $stmnt->execute([$_POST['name'], $_POST['email'], $hashed_salted_pwd, $_POST['date'], $_POST['age']]);
+                $submit_status = "success";
             } catch (PDOException $e) {
+                $submit_status = "failed";
                 echo $e->getMessage();
             }
-
-            // Redirect to login page
-            header("Location: http://{$_SERVER['HTTP_HOST']}/4ww3recreationalparks/loginPage.php");
         }
     }
 ?>
 <div class="container register-form">
     <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" name="registerForm" method="post">
-
+        <?php
+            if ($submit_status === "success"){
+                echo '<h4 class="success-msg">Thank you! Your registration was successful. You can login in now.</h4>';
+                $_SESSION['status'] = "default";
+            } else if ($submit_status === "failed") {
+                echo '<h4 class="fail-msg">Your registration was not successful!</h4>';
+                $_SESSION['status'] = "default";
+            } else {
+                echo '';
+            }
+        ?>
         <h2>Register</h2>
         <p>Please fill in this form to create an account.</p>
         <!--The <hr> element creates a horizontal line which acts as a divider-->

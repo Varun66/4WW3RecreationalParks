@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
 ?>
 <!--DOCTYPE declaration which specifies that the document is in html5 -->
 <!DOCTYPE html>

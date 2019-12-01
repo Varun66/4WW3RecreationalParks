@@ -1,6 +1,26 @@
 <!--DOCTYPE declaration which specifies that the document is in html5 -->
-<?php include "header.php";?>
+<?php
 
+    parse_str($_SERVER['QUERY_STRING'], $result);
+
+    $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Query we are using to check if the user is legit
+    $sql = "Select * from objects where ID=?";
+    $stmnt = $pdo->prepare($sql);
+    try {
+        $stmnt->execute([$result['id']]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    // For getting data from the query to submitted above.
+    $rows = $stmnt->fetchAll();
+    echo $rows[0]['Name'];
+?>
+<?php include "header.php";?>
 <!--This <div> block represents the top banner area of the page. The banner-bg class has the css for the background image
     and it is the defined as the parent div (i.e. the top most element) because the background should be full width and
     it should cover all the elements inside the parent div (i.e. all the child elements)-->

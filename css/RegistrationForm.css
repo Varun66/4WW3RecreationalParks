@@ -9,6 +9,23 @@
   align-items: center;
 }
 
+.login-message {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 100%;
+  text-align: center;
+}
+
+.success-msg {
+  color: green;
+  margin-bottom: 20px;
+}
+
+.fail-msg {
+  color: red;
+  margin-bottom: 20px;
+}
+
 form {
   width: 100%;
 }
