@@ -1,38 +1,36 @@
 <?php
+    //Start session
     session_start();
+    //Import functions file with common functions
+    include 'functions.php';
+
+    //Set inital log status to false
     $_SESSION['logged'] = false;
 
-    $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //Create PDO and connect to the database
+    $pdo = db_connect();
 
+    //Check if all the form fields are set and that they exist (validation for whether or not they are empty is done by the required attribute in the html)
     if (isset($_POST['email']) && isset($_POST['pwd'])){
 
-        // Query we are using to check if the user is legit
-        $sql = "Select * from users where Email=?";
-        $stmnt = $pdo->prepare($sql);
-        try {
-            $stmnt->execute([$_POST['email']]);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        //Call sqlQuery function which executes the specified sql query with the appropriate parameters and returns the result
+        $rows = sqlQuery($pdo, "Select * from users where Email=?", [$_POST['email']], true);
 
-        // For getting data from the query to submitted above.
-        $rows = $stmnt->fetchAll();
-
-        // If there is only one user
+        //Check if the inputted password matches the password stored in the database (password_verify decrypts the hashed/salted password in the database)
         if (password_verify($_POST['pwd'], $rows[0]['Password'])) {
+            //If succesful, store the username in the session
             $_SESSION['username'] = $rows[0]['Name'];
-            $_SESSION['logged'] = true;
-            header("Location: https://{$_SERVER['HTTP_HOST']}/index.php");
+            //Redirect to home page
+            handleError("logged", true, "index.php");
+
         } else {
-            $_SESSION['account'] = "Incorrect";
-            header("Location: https://{$_SERVER['HTTP_HOST']}/loginPage.php");
+            //If failed, post back to login page with the error message
+            handleError("account", "Incorrect", "loginPage.php");
+
         }
 
     } else {
-        // This path is dependent on where the root of your documents is located.
-        // For this it is made to point back to the index file if login has failed.
-        echo 'failed';
+        //If failed, post back to login page with the error message
+        handleError("account", "Incorrect", "loginPage.php");
     }
 ?>

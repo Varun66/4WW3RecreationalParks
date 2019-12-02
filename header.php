@@ -17,16 +17,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Link tags with the css stylesheets-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!--Based on the page, include the appropriate css files.-->
         <?php if(basename($_SERVER['PHP_SELF']) == 'registration.php' || basename($_SERVER['PHP_SELF']) == 'loginPage.php'){ ?>
-            <link rel="stylesheet" href="./css/RegistrationForm.css?v=1">
+            <link rel="stylesheet" href="./css/RegistrationForm.css?v=2">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'index.php'){ ?>
-            <link rel="stylesheet" href="./css/search.css?v=1">
+            <link rel="stylesheet" href="./css/search.css?v=2">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'results.php'){ ?>
-            <link rel="stylesheet" href="./css/results_sample.css?v=1">
+            <link rel="stylesheet" href="./css/results.css?v=2">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'submission.php'){ ?>
-            <link rel="stylesheet" href="./css/RegistrationForm.css?v=1">
+            <link rel="stylesheet" href="./css/RegistrationForm.css?v=2">
         <?php } elseif(basename($_SERVER['PHP_SELF']) == 'individual.php'){ ?>
-            <link rel="stylesheet" href="./css/individual_sample.css?v=1">
+            <link rel="stylesheet" href="./css/individual.css?v=2">
         <?php } ?>
         <link rel="stylesheet" href="./css/typography.css">
         <link rel="stylesheet" href="./css/common.css">
@@ -68,6 +69,7 @@
                     </ul>
                 </div>
                 <?php
+                    //If the user is logged in, then display the username and logout button. Else, display the login and sign up button
                     if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){
                         $user = $_SESSION['username'];
                         echo '<p class="welcome-msg">Welcome '. $user . '</p>';

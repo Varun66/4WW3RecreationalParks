@@ -1,43 +1,24 @@
-<!--DOCTYPE declaration which specifies that the document is in html5 -->
 <?php
+    //Import functions file with common functions
+    include 'phpfunctions/functions.php';
+
+    //Import necessary libraries to send objects to AWS S3 bucket
     require './vendor/autoload.php';
 
     use Aws\S3\S3Client;
     use Aws\Exception\AwsException;
 
+    //Use in-built php function to parse the URL query string to get the id
     parse_str($_SERVER['QUERY_STRING'], $result);
 
-    $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //Create PDO and connect to the database
+    $pdo = db_connect();
 
-    // Query we are using to check if the user is legit
-    $sql = "Select * from objects where ID=?";
-    $stmnt = $pdo->prepare($sql);
-    try {
-        $stmnt->execute([$result['id']]);
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
+    //Call sqlQuery function which executes the specified sql query with the appropriate parameters and returns the result
+    $rows = sqlQuery($pdo, "Select * from objects where ID=?", [$result['id']], true);
+    $rowsReview = sqlQuery($pdo, "Select * from reviews where ParkName=?", [$rows[0]['Name']], true);
 
-    // For getting data from the query to submitted above.
-    $rows = $stmnt->fetchAll();
-
-    // Query we are using to check if the user is legit
-    $sqlReview = "Select * from reviews where ParkName=?";
-    $stmntReview = $pdo->prepare($sqlReview);
-    try {
-        $stmntReview->execute([$rows[0]['Name']]);
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-
-    // For getting data from the query to submitted above.
-    $rowsReview = $stmntReview->fetchAll();
-
-    $IAM_KEY = '';
-    $IAM_SECRET = '';
-
+    //Connect to aws by passing the credentials
     $s3 = S3Client::factory(
         array(
             'credentials' => array(
@@ -50,8 +31,13 @@
     );
 
     try {
-        // Get the object.
-        $url = $s3->getObjectUrl('myparkfinders3', $rows[0]['ImageKey']);
+        //Check if the image key is empty
+        if(strlen($rows[0]['ImageKey']) >= 1) {
+            //Use getObjectUrl() method to retrieve the image url from s3 (all the objects in the bucket are public)
+            $url = $s3->getObjectUrl('myparkfinders3', $rows[0]['ImageKey']);
+        } else {
+            $url = '';
+        }
     } catch (S3Exception $e) {
         $url = '';
     }
@@ -89,6 +75,7 @@
 <div class="container section-padding ratings-section">
     <h2>Ratings and Reviews</h2>
     <?php
+        //If the user is logged in, then display the form for them to submit a review.
         if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
     ?>
         <form class="review-form" action="" name="reviewForm">
@@ -96,6 +83,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <label for="userRating"><b>Rating</b></label>
+                    <!--A select form element for the rating of the object. It is a required field.-->
                     <select name="userRating" required>
                         <option value="" disabled selected>Select a Rating (High - Low)</option>
                         <option value="5">5</option>
@@ -107,9 +95,10 @@
                 </div>
                 <div class="col-md-12">
                     <label for="userReview"><b>Review</b></label>
-                    <!--A textarea form element for the description of the object. It is a required field.-->
+                    <!--A textarea form element for the review of the object. It is a review field.-->
                     <textarea id="userReview" placeholder="Enter a your review" name="userReview" required></textarea>
                 </div>
+                <!--Input hidden form element to store the park name and username. This will not be visible to the users.-->
                 <input type="hidden" name="parkName" value="<?php echo $rows[0]["Name"] ?>">
                 <input type="hidden" name="userName" value="<?php echo $_SESSION['username'] ?>">
                 <div class="signin">
@@ -119,20 +108,23 @@
         </form>
         <hr>
     <?php
+        //If the user is not logged in, then display a message.
         } else {
             echo '<h4>Login to submit your own review.</h4>';
         }
     ?>
     <div class="ratings">
         <?php
+            //Check if there is at least 1 review for the object
             if (count($rowsReview) > 0) {
+                //Create a for loop which loops through the array and display's the information on the page.
                 for ($i = 0; $i < count($rowsReview); $i++) {
                     echo '
                         <!--The follow <div> block contains the markup for the Review microdata schema-->
                         <div class="row ratings-row" itemscope itemtype="http://schema.org/Review">
                             <!--This column contains the user profile picture-->
                             <div class="col-1 rating-img">
-                                <img src="./images/anonymous-user.png" alt="A profile picture of the user"/>
+                                <img src="https://myparkfinders3.s3.amazonaws.com/anonymous-user.png" alt="A profile picture of the user"/>
                             </div>
                             <!--This column contains the user name, rating, date of post and review-->
                             <div class="col-11 rating-text" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
@@ -145,11 +137,12 @@
                     ';
                 }
             } else {
+                //Display message if there are no reviews yet.
                 echo '<h4 class="no-reviews">There are no reviews for this park yet.</h4>';
             }
         ?>
     </div>
 </div>
-
+<!--Store the sql query result in a javascript variable so that it can be used in another javascript file (this is to display the markers on the map)-->
 <script type="text/javascript">var parks =<?php echo json_encode($rows); ?>;</script>
 <?php include "footer.php";?>

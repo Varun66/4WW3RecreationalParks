@@ -1,107 +1,57 @@
 <!--DOCTYPE declaration which specifies that the document is in html5 -->
 <?php
-    //copied distance function from https://stackoverflow.com/questions/10053358/measuring-the-distance-between-two-coordinates-in-php
-    function distance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371){
-        // convert from degrees to radians
-        $latFrom = deg2rad($latitudeFrom);
-        $lonFrom = deg2rad($longitudeFrom);
-        $latTo = deg2rad($latitudeTo);
-        $lonTo = deg2rad($longitudeTo);
+    //Import functions file with common functions
+    include "phpfunctions/functions.php";
 
-        $lonDelta = $lonTo - $lonFrom;
-        $a = pow(cos($latTo) * sin($lonDelta), 2) +
-          pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
-        $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
+    //Create PDO and connect to the database
+    $pdo = db_connect();
 
-        $angle = atan2(sqrt($a), $b);
-        return $angle * $earthRadius;
-    }
-
+    //If the user is searching by name:
+    //Check if all the form fields are set and that they exist (validation for whether or not they are empty is done by the required attribute in the html)
     if (isset($_POST['searchByName']) && isset($_POST['parkName'])) {
-        $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-        $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //Call sqlQuery function which executes the specified sql query with the appropriate parameters and returns the result
+        $rows = sqlQuery($pdo, "Select * from objects where Name=?", [$_POST['parkName']], true);
 
-        // Query we are using to check if the user is legit
-        $sql = "Select * from objects where Name=?";
-        $stmnt = $pdo->prepare($sql);
-        try {
-            $stmnt->execute([$_POST['parkName']]);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        // For getting data from the query to submitted above.
-        $rows = $stmnt->fetchAll();
-
+    //If the user is searching by rating:
+    //Check if all the form fields are set and that they exist (validation for whether or not they are empty is done by the required attribute in the html)
     } else if (isset($_POST['searchByRating']) && isset($_POST['minRating']) && isset($_POST['maxRating'])) {
-        $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-        $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //Call sqlQuery function which executes the specified sql query with the appropriate parameters and returns the result
+        $rows = sqlQuery(
+            $pdo,
+            "Select objects.*, AVG(Rating) from reviews inner join objects on objects.Name=reviews.ParkName group by reviews.ParkName having AVG(Rating) > ? AND AVG(Rating) < ?",
+            [$_POST['minRating'], $_POST['maxRating']],
+            true
+        );
 
-        // Query we are using to check if the user is legit
-        $sql = "Select objects.*, AVG(Rating) from reviews inner join objects on objects.Name=reviews.ParkName group by reviews.ParkName having AVG(Rating) > ? AND AVG(Rating) < ?";
-        $stmnt = $pdo->prepare($sql);
-        try {
-            $stmnt->execute([$_POST['minRating'], $_POST['maxRating']]);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        // For getting data from the query to submitted above.
-        $rows = $stmnt->fetchAll();
-
+    //If the user is searching by location:
+    //Check if all the form fields are set and that they exist (validation for whether or not they are empty is done by the required attribute in the html)
     } else if (isset($_POST['searchByUserLocation']) && isset($_POST['userLocation']) && isset($_POST['latitude']) && isset($_POST['longitude'])) {
-        $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-        $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Query we are using to check if the user is legit
-        $sql = "Select * from `objects`";
-        $stmnt = $pdo->prepare($sql);
-        try {
-            $stmnt->execute();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        // For getting data from the query to submitted above.
-        $allRows = $stmnt->fetchAll();
+        //Call sqlQuery function which executes the specified sql query with the appropriate parameters and returns the result
+        $allRows = sqlQuery($pdo, "Select * from objects", [], true);
         $rows = array();
 
+        //Check if the user want's to see parks within more than a 200 km radium from them. This would just include all parks
         if ($_POST['userLocation'] === "More than 200"){
             $rows = $allRows;
         } else {
+            //Loop through the query result and call distance function to check the condition
             for ($i = 0; $i < count($allRows); $i++){
                 if(distance($_POST['latitude'], $_POST['longitude'], $allRows[$i]['Latitude'], $allRows[$i]['Longitude']) <= $_POST['userLocation']){
+                    //Push the result to the rows array
                     array_push($rows, $allRows[$i]);
                 }
             }
         }
 
+    //If the user is wants to see all parks:
     } else if (isset($_POST['viewAllParks'])) {
-        $pdo = new PDO('mysql:host=localhost;dbname=myparkfinder_db', '4ww3', 'myparkfinder');
-        $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Query we are using to check if the user is legit
-        $sql = "Select * from objects";
-        $stmnt = $pdo->prepare($sql);
-        try {
-            $stmnt->execute();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        // For getting data from the query to submitted above.
-        $rows = $stmnt->fetchAll();
+        $rows = sqlQuery($pdo, "Select * from objects", [], true);
     }
 ?>
 
 <?php include "header.php";?>
 
-<!--This container holds the map. For now it is an image, but it will change to an actual map. It is given the class of container fluid so that is spans across
-the whole screen and the p-0 class removes any padding.-->
+<!--This container holds the map. It is given the class of container fluid so that is spans across the whole screen and the p-0 class removes any padding.-->
 <div class="container-fluid p-0">
     <div id="map"></div>
 </div>
@@ -126,13 +76,13 @@ the whole screen and the p-0 class removes any padding.-->
         <!--The body of the table which consists of rows (i.e. <tr> tags) and the tabular data to be displayed in each row (i.e. <td> tags)-->
         <tbody>
             <?php
+                //Import necessary libraries to send objects to AWS S3 bucket
                 require './vendor/autoload.php';
 
                 use Aws\S3\S3Client;
                 use Aws\Exception\AwsException;
 
-                $IAM_KEY = '';
-                $IAM_SECRET = '';
+                //Connect to aws by passing the credentials
                 $s3 = S3Client::factory(
                     array(
                         'credentials' => array(
@@ -144,11 +94,18 @@ the whole screen and the p-0 class removes any padding.-->
                     )
                 );
 
+                //Check if there is at least 1 park found
                 if (count($rows) > 0){
+                    //Create a for loop which loops through the array and display's the information on the page.
                     for ($i = 0; $i < count($rows); $i++) {
                         try {
-                            // Get the object.
-                            $url = $s3->getObjectUrl('myparkfinders3', $rows[$i]['ImageKey']);
+                            //Check if the image key is empty for each row
+                            if(strlen($rows[$i]['ImageKey']) >= 1) {
+                                //Use getObjectUrl() method to retrieve the image url from s3 (all the objects in the bucket are public)
+                                $url = $s3->getObjectUrl('myparkfinders3', $rows[$i]['ImageKey']);
+                            } else {
+                                $url = '';
+                            }
                         } catch (S3Exception $e) {
                             $url = '';
                         }
@@ -174,6 +131,7 @@ the whole screen and the p-0 class removes any padding.-->
                         ';
                     }
                 } else {
+                    //If there are no parks found, display a message.
                     echo '
                         <tr>
                             <td>No Parks found</td>
@@ -184,5 +142,6 @@ the whole screen and the p-0 class removes any padding.-->
         </tbody>
     </table>
 </div>
+<!--Store the sql query result in a javascript variable so that it can be used in another javascript file (this is to display the markers on the map)-->
 <script type="text/javascript">var parks =<?php echo json_encode($rows); ?>;</script>
 <?php include "footer.php";?>

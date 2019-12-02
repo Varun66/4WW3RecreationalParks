@@ -1,6 +1,7 @@
 /*This file contains javascript for the individual object page*/
 
 $(document).ready(function(){
+    //Inject css to the div with banner-bg class
     $(".banner-bg").css({
         "background": "linear-gradient(90deg, rgba(0, 0, 0, 0.6), transparent), url("+$(".banner-bg").attr('data-bg')+")", /*Specifies the background image to use and adds a gradient to it*/
         "background-size": "cover",     /*Specifies the size of background image. By setting it to cover, it will automatically resize to cover the entire area of the div.*/
@@ -11,15 +12,18 @@ $(document).ready(function(){
     });
 
     $('form').on('submit', function (e) {
-
+        //prevent default browser behaviour
         e.preventDefault();
 
+        /*AJAX is being used to post the form data to phpfunctions/addReview.php.*/
         $.ajax({
           type: 'post',
           url: 'phpfunctions/addReview.php',
           data: $('form').serialize(),
           success: function () {
+            /*On success, a success message gets appended to the DOM.*/
             $("form").append("<h4 class='success-msg'>Thank you! Your review was submitted successfully</h4>");
+            /*The submitted values from each input gets appened with HTML to the DOM (works without reloading the page)*/
             $(".ratings").append(
             '<div class="row ratings-row" itemscope itemtype="http://schema.org/Review">' +
                 '<!--This column contains the user profile picture-->' +
@@ -36,6 +40,7 @@ $(document).ready(function(){
             '</div>');
           },
           error: function() {
+            /*On error, an error message gets appended to the DOM*/
             $("form").append("<h4 class='fail-msg'>Your review was not submitted. Please try again</h4>");
           }
         });

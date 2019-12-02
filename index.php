@@ -39,8 +39,9 @@
     <div class="tab-content">
         <!--This is the tab content for the name tab, as specified with the id.-->
         <div class="tab-pane fade show active" id="name" role="tabpanel" aria-labelledby="name-tab">
-            <!--This is a form element with one text input so that a user can search by name. The form action directs the page to the sample results page.-->
+            <!--This is a form element with one text input so that a user can search by name. The form action directs the page to the results page.-->
             <form class="search-container" action="results.php" method="POST" name="searchByName">
+                <!--We are making this input field hidden so that the form name gets sent with the form. We can perform the next action accordingly. Users will not be able to see this field-->
                 <input type="hidden" name="searchByName" value=""/>
                 <!--We are making this input field required so that users can't submit empty inputs-->
                 <input name="parkName" type="text" placeholder="Enter the name of a park" required>
@@ -49,11 +50,12 @@
         </div>
         <!--This is the tab content for the rating tab, as specified with the id.-->
         <div class="tab-pane fade" id="rating" role="tabpanel" aria-labelledby="rating-tab">
-            <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by rating. The form action directs the page to the sample results page.-->
+            <!--This is a form element with two select elements (i.e dropdown) so that a user can choose and search by rating. The form action directs the page to the results page.-->
             <form class="search-container" action="results.php" method="POST" name="searchByRating">
+                <!--We are making this input field hidden so that the form name gets sent with the form. We can perform the next action accordingly. Users will not be able to see this field-->
                 <input type="hidden" name="searchByRating" value=""/>
                 <!--We are making this select field required so that users can't submit empty inputs-->
-                <select name="minRating" required>
+                <select id="min" name="minRating" onblur="check()" required>
                     <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
                     <option value="" disabled selected>Minimum</option>
                     <option value="5">5</option>
@@ -64,7 +66,7 @@
                 </select>
                 <h2 class="rating-range"> - </h2>
                 <!--We are making this select field required so that users can't submit empty inputs-->
-                <select name="maxRating" required>
+                <select id="max" name="maxRating" required>
                     <!--This is a disabled option that acts as a placeholder for the select element. User's can't choose this value and submit it.-->
                     <option value="" disabled selected>Maximum</option>
                     <option value="5">5</option>
@@ -73,6 +75,7 @@
                     <option value="2">2</option>
                     <option value="1">1</option>
                 </select>
+
                 <button class="btn btn-dark-blue rating-submit" type="submit">Submit</button>
             </form>
         </div>
@@ -84,8 +87,9 @@
             <div class="spinner-container">
                 <div class="spinner"></div>
             </div>
-            <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by radius. The form action directs the page to the sample results page.-->
+            <!--This is a form element with one select element (i.e dropdown) so that a user can choose and search by radius. The form action directs the page to the results page.-->
             <form class="search-container location-search" action="results.php" method="POST" name="searchByUserLocation">
+                <!--We are making this input field hidden so that the form name gets sent with the form. We can perform the next action accordingly. Users will not be able to see this field-->
                 <input type="hidden" name="searchByUserLocation" value=""/>
                 <select name="userLocation" required>
                     <option value="" disabled selected>Select a Radius (in km)</option>
@@ -95,7 +99,6 @@
                     <option value="50">50</option>
                     <option value="100">100</option>
                     <option value="150">150</option>
-                    <option value="200">200</option>
                     <option value="More than 200">>200</option>
                 </select>
                 <button class="btn btn-dark-blue" type="submit">Submit</button>
@@ -103,7 +106,9 @@
         </div>
     </div>
     <h2 class="text-center or-text">or</h2>
+    <!--This form gives the option for users to see all the parks in the database-->
     <form class="text-center" action="results.php" method="POST" name="viewAllParks">
+        <!--We are making this input field hidden so that the form name gets sent with the form. We can perform the next action accordingly. Users will not be able to see this field-->
         <input type="hidden" name="viewAllParks" value=""/>
         <button class="btn view-all-parks" type="submit">View All Parks</button>
     </form>

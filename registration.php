@@ -1,34 +1,41 @@
-<!-- Web Page for user to Register the form -->
-<?php include "header.php";?>
+<!-- Web Page for user to Register-->
+<?php
+    include "header.php";
+    //Import functions file with common functions
+    include "phpfunctions/functions.php";
+?>
 
 <div class="container register-form">
-    <!--A form element for the user registration. Right now, it performs no action. The POST method means that the it will be sending data to the server.-->
+    <!--A form element for the user registration-->
     <form action="phpfunctions/register.php" method="POST" name="registerForm" method="post">
         <?php
-            if (isset($_SESSION['validate']) && $_SESSION['validate'] === "success"){
-                echo '<h4 class="success-msg">Thank you! Your registration was successful. You can login in now.</h4>';
-                $_SESSION['validate'] = "default";
-            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "failed") {
-                echo '<h4 class="fail-msg">Your registration was not successful!</h4>';
-                $_SESSION['validate'] = "default";
-            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidEmail") {
-                echo '<h4 class="fail-msg">Please check the format of the email field!</h4>';
-                $_SESSION['validate'] = "default";
-            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidPassword") {
-                echo '<h4 class="fail-msg">The password does not match!</h4>';
-                $_SESSION['validate'] = "default";
-            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidDate") {
-                echo '<h4 class="fail-msg">Please check the format of the date field!</h4>';
-                $_SESSION['validate'] = "default";
-            }  else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "InvalidAge") {
-                echo '<h4 class="fail-msg">Please check the format of the age field! It should be a number</h4>';
-                $_SESSION['validate'] = "default";
-            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "Unset") {
-                echo '<h4 class="fail-msg">The submission failed! Please try again later.</h4>';
-                $_SESSION['validate'] = "default";
-            } else if (isset($_SESSION['validate']) && $_SESSION['validate'] === "Duplicate") {
-                echo '<h4 class="fail-msg">An account with this email already exists!</h4>';
-                $_SESSION['validate'] = "default";
+            //Check if Session['validate'] is set
+            if (isset($_SESSION['validate'])) {
+                //Series of if statements to check the value of the session variable and use the displayError function to display a message accordingly.
+                if ($_SESSION['validate'] === "success"){
+                    displayError('<h4 class="success-msg">Thank you! Your registration was successful. You can login in now.</h4>', 'validate');
+
+                } else if ($_SESSION['validate'] === "failed") {
+                    displayError('<h4 class="fail-msg">Your registration was not successful!</h4>', 'validate');
+
+                } else if ($_SESSION['validate'] === "InvalidEmail") {
+                    displayError('<h4 class="fail-msg">Please check the format of the email field!</h4>', 'validate');
+
+                } else if ($_SESSION['validate'] === "InvalidPassword") {
+                    displayError('<h4 class="fail-msg">The password does not match!</h4>', 'validate');
+
+                } else if ($_SESSION['validate'] === "InvalidDate") {
+                    displayError('<h4 class="fail-msg">Please check the format of the date field!</h4>', 'validate');
+
+                }  else if ($_SESSION['validate'] === "InvalidAge") {
+                    displayError('<h4 class="fail-msg">Please check the format of the age field! It should be a number</h4>', 'validate');
+
+                } else if ($_SESSION['validate'] === "Unset") {
+                    displayError('<h4 class="fail-msg">The submission failed! Please try again later.</h4>', 'validate');
+
+                } else if ($_SESSION['validate'] === "Duplicate") {
+                    displayError('<h4 class="fail-msg">An account with this email already exists!</h4>', 'validate');
+                }
             }
         ?>
         <h2>Register</h2>
@@ -36,8 +43,8 @@
         <!--The <hr> element creates a horizontal line which acts as a divider-->
         <hr>
 
-            <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-4" to say that for any viewport size above and including 768px,
-            the <div> width should be 4 columns or 33.3333%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
+        <!--The bootstrap grid system is split into 12 columns. We are using the class "col-md-4" to say that for any viewport size above and including 768px,
+        the <div> width should be 4 columns or 33.3333%. For anything below 768px, the <div> should be 12 columns or 100%. This leads to a good responsive design-->
         <div class="row">
             <div class="col-md-4">
                 <label for="name"><b>Name</b></label>
@@ -61,12 +68,12 @@
             </div>
             <div class="col-md-4">
                 <label for="date"><b>Birth Date</b></label>
-                <!--An input form element of type=date for the user's date of birth. It is an optional field-->
+                <!--An input form element of type=date for the user's date of birth. It is an required field-->
                 <input id="date" type="text"  placeholder="yyyy-mm-dd" name="date" required>
             </div>
             <div class="col-md-4">
                 <label for="age"><b>Age</b></label>
-                <!--An input form element of type=date for the user's date of birth. It is an optional field-->
+                <!--An input form element of type=date for the user's age. It is an required field-->
                 <input id="age" type="text" placeholder="Enter a number"  name="age" required>
             </div>
         </div>

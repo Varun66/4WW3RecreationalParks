@@ -37,7 +37,7 @@ function initLocationProcedure() {
 					'<div id="content" class="container park-marker">' +
 					'<h4>' + parks[i]["Name"] + '</h4>' +
                     '<p>' + parks[i]["Description"] + '</p>' +
-                    '<a href="individual.php?id=' + i + '" target="_blank">View More Details</a>' +
+                    '<a href="individual.php?id=' + parks[i]["ID"] + '" target="_blank">View More Details</a>' +
 					'</div>'
 				);
                 infowindow.open(map, marker);  //opens the infowindow on the map above the clicked marker

@@ -20,6 +20,11 @@
 
 .park-marker p {
     margin-bottom: 10px;
+    -webkit-line-clamp: 2; /*Clip the description after 2 lines*/
+    display: block; /*For browsers that don't support box display*/
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /******************************************** CSS For Results Table ***************************************************/
@@ -79,6 +84,11 @@ td h4 {
 td p {
     max-width: 75%;
     margin: 0 auto 10px auto;
+    -webkit-line-clamp: 2; /*Clip the description after 2 lines*/
+    display: block; /*For browsers that don't support box display*/
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /*Custom styling for the park details link*/

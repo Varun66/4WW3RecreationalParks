@@ -4,7 +4,7 @@
 
 /*Styling for the banner image.*/
 .banner-bg{
-    background-image: url('../images/hiking_bg.jpg');    /*Specifies the background image to use*/
+    background-image: url('https://myparkfinders3.s3.amazonaws.com/hiking_bg.jpg');    /*Specifies the background image to use*/
     background-size: cover;     /*Specifies the size of background image. By setting it to cover, it will automatically resize to cover the entire area of the div.*/
     background-attachment: fixed;    /*A fixed background attachment gives a parallax effect. It means that the background will stay fixed as the user scrolls the page.*/
     background-repeat: no-repeat;    /*By setting background repeat to no repeat, it will not repeat the background image multiple items if the size of the whole image cannot cover the entire div.*/
